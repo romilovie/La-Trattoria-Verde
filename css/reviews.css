@@ -1,0 +1,133 @@
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+/* ===== СЛАЙДЕР ===== */
+.reviews-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.slider-window {
+  width: 330px;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.review-card {
+  min-width: 320px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 0 10px;
+  position: relative;
+  color: #1f3627;
+}
+
+.review-card h3 {
+  margin-top: 0;
+}
+
+.review-card .rating {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: #f5b400;
+}
+
+.review-card .date {
+  font-size: 13px;
+  opacity: 0.6;
+  color: #2d4736;
+}
+
+/* ===== СТРЕЛКИ ===== */
+.arrow {
+  border: none;
+  background: rgba(0,0,0,0.1);
+  font-size: 28px;
+  padding: 6px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ===== КНОПКА ===== */
+.add-review {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.add-review button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ===== МОДАЛКА ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #8db098;
+  border-radius: 16px;
+  padding: 20px;
+  width: 300px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* ===== ЗВЁЗДЫ ===== */
+.stars span {
+  font-size: 26px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.stars span.active {
+  color: #f5b400;
+}
+
+input, textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.modal-content button {
+  margin-top: 14px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+}
