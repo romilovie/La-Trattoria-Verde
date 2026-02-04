@@ -51,7 +51,7 @@ h1 {
 /* ===== СТРЕЛКИ ===== */
 .arrow {
   border: none;
-  background: rgba(0,0,0,0.1);
+  background: rgba(116, 177, 113, 0.8);
   font-size: 28px;
   padding: 6px 12px;
   border-radius: 50%;
@@ -132,4 +132,5 @@ textarea {
   background: #000;
   color: #fff;
 }
+
 
