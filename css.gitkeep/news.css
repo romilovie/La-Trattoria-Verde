@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f7f5;
+    color: #1f2d2a;
+}
+
+.news {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.news-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.news-left {
+    width: 40%;
+    padding: 25px;
+    background: #89b3a9;
+}
+
+.news-date {
+    font-size: 14px;
+    color: #4b6b63;
+}
+
+.news-title {
+    margin: 10px 0 15px;
+    font-size: 22px;
+    color: #374f49;
+}
+
+.news-left img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.news-right {
+    width: 60%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    color: #2d403b;
+    background: #abc9c2;
+}
+
+.news-preview {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.news-full {
+    display: none;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.news-card.open .news-full {
+    display: block;
+}
+
+.news-btn {
+    align-self: flex-start;
+    background: #0f3d2e;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.news-btn:hover {
+    background: #145c44;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .news-card {
+        flex-direction: column;
+    }
+
+    .news-left,
+    .news-right {
+        width: 100%;
+    }
+}

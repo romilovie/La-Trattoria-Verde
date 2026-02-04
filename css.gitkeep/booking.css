@@ -1,0 +1,197 @@
+
+
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f6f4ef;
+    color: #2c2c2c;
+}
+
+header {
+    padding: 20px;
+    background: #1f4d45;
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.booking {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* ===== СХЕМА ЗАЛА ===== */
+.hall {
+    display: grid;
+    grid-template-columns: 140px 220px 140px;
+    grid-template-rows: 100px 120px 100px;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px auto;
+}
+
+.table {
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #6c968d;
+    border: 2px solid transparent;
+}
+
+.table span {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.free:hover {
+    border-color: #1f4d45;
+}
+
+.busy {
+    background: #828282;
+    cursor: not-allowed;
+}
+
+.selected {
+    border-color: #f1b400;
+    background: #ccb970;
+}
+
+/* Позиции */
+.table-1 { grid-column: 1; grid-row: 2; }
+.table-2 { grid-column: 1; grid-row: 3; }
+
+.table-3 { grid-column: 2; grid-row: 1; }
+.table-4 { grid-column: 3; grid-row: 1; }
+
+.table-5 { grid-column: 2; grid-row: 3; }
+.table-6 { grid-column: 3; grid-row: 3; }
+
+/* ===== ИНФО ===== */
+.summary {
+    margin: 20px 0;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #e0721d;
+    color: white;
+}
+
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+/* ===== МОДАЛКИ ===== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #0e2b2a;
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 420px;
+}
+
+.times {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.time {
+    background: #e4f1ee;
+    color: #000;
+}
+
+.time.busy {
+    background: #ccc;
+}
+
+.time.selected {
+    background: #f1b400;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+/* ================= SUCCESS PAGE ================= */
+
+.success {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(5, 20, 20, 0.85), rgba(5, 20, 20, 0.85)),
+        url("../images/success-bg.jpg") center / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    color: #fff;
+}
+
+.success h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.success h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.success p {
+    max-width: 700px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.success a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 40px;
+    background-color: #1b6c77;
+    color: #fff;
+    border-radius: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
