@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Отзывы</title>
+  <link rel="stylesheet" href="css/reviews.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container header__inner">
+
+        <!-- Логотип -->
+        <a href="index.html" class="logo">
+            La Trattoria Verde
+        </a>
+
+        <!-- Навигация -->
+        <nav class="nav" id="nav-menu">
+            <ul class="nav__list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="booking.html">Бронирование</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+            </ul>
+        </nav>
+
+        <!-- Правая часть хедера -->
+        <div class="header__actions">
+            <a href="tel:+7XXXXXXXXXX" class="header__phone">
+                +7 (XXX) XXX-XX-XX
+            </a>
+
+            <a href="booking.html" class="btn btn--primary">
+                Забронировать столик
+            </a>
+
+            <!-- Кнопка бургер-меню (для мобильных, JS позже) -->
+            <button class="burger" id="burger-btn" aria-label="Открыть меню">
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<body>
+
+<h1>Отзывы наших гостей</h1>
+
+<!-- ===== БЛОК 1: СЛАЙДЕР ОТЗЫВОВ ===== -->
+<section class="reviews-slider">
+
+  <button class="arrow left" id="prevBtn">‹</button>
+
+  <div class="slider-window">
+    <div class="slider-track" id="reviewsList">
+
+      <!-- ОТЗЫВ -->
+      <div class="review-card">
+        <div class="rating">★★★★★</div>
+        <h3>Марк</h3>
+        <p class="text">
+          Обожаю это место! Атмосфера — чистая Италия. Карбонара здесь просто
+          божественная, а тирамису — лучший в городе. Уже рекомендовал всем друзьям!
+        </p>
+        <span class="date">21 мая 2026</span>
+      </div>
+
+      <div class="review-card">
+        <div class="rating">★★★★★</div>
+        <h3>Катя и команда</h3>
+        <p class="text">
+          Отметили здесь день рождения отделом — всё было идеально!
+          Заказ на 12 человек выполнили безупречно, все в восторге от пиццы
+          и стейка тунца. Обслуживание на высшем уровне.
+        </p>
+        <span class="date">10 июня 2026</span>
+      </div>
+
+      <div class="review-card">
+        <div class="rating">★★★★★</div>
+        <h3>Алексей</h3>
+        <p class="text">
+          Наконец-то нашёл в городе ресторан, где умеют готовить по-настоящему.
+          Прошутто э руккола, лавендер сауэр — всё с душой.
+        </p>
+        <span class="date">5 июля 2026</span>
+      </div>
+
+    </div>
+  </div>
+
+  <button class="arrow right" id="nextBtn">›</button>
+</section>
+
+<!-- ===== БЛОК 2: КНОПКА ===== -->
+<div class="add-review">
+  <button id="openModal">Оставить отзыв</button>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container footer__grid">
+
+        <!-- Колонка 1 -->
+        <div class="footer__column">
+            <h3>Навигация</h3>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="booking.html">Бронирование</a></li>
+            </ul>
+        </div>
+
+        <!-- Колонка 2 -->
+        <div class="footer__column">
+            <h3>Контакты</h3>
+            <p>Адрес: г. Город, ул. Итальянская, 12</p>
+            <p>Телефон: <a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a></p>
+            <p>Email: info@trattoriaverde.ru</p>
+        </div>
+
+        <!-- Колонка 3 -->
+        <div class="footer__column">
+            <h3>Часы работы</h3>
+            <p>Пн–Пт: 12:00 – 23:00</p>
+            <p>Сб–Вс: 12:00 – 00:00</p>
+        </div>
+
+        <!-- Колонка 4 -->
+        <div class="footer__column">
+            <h3>Подписка</h3>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Ваш email">
+                <button type="submit">Подписаться</button>
+            </form>
+
+            <div class="socials">
+                <a href="#">VK</a>
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Нижняя строка -->
+    <div class="footer__bottom">
+        <p>© La Trattoria Verde, 2026</p>
+        <a href="#">Политика конфиденциальности</a>
+    </div>
+</footer>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">×</span>
+
+    <h2>Оставить отзыв</h2>
+
+    <div class="stars" id="starRating">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+
+    <input type="text" id="nameInput" placeholder="Ваше имя">
+    <textarea id="textInput" placeholder="Текст отзыва"></textarea>
+
+    <button id="submitReview">Отправить</button>
+  </div>
+</div>
+
+<script src="js/reviews.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

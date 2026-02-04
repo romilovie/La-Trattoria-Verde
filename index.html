@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>La Trattoria Verde — Итальянский ресторан</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Подключение CSS (оформление добавишь позже) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container header__inner">
+
+        <!-- Логотип -->
+        <a href="index.html" class="logo">
+            La Trattoria Verde
+        </a>
+
+        <!-- Навигация -->
+        <nav class="nav" id="nav-menu">
+            <ul class="nav__list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="booking.html">Бронирование</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+            </ul>
+        </nav>
+
+        <!-- Правая часть хедера -->
+        <div class="header__actions">
+            <a href="tel:+7XXXXXXXXXX" class="header__phone">
+                +7 (XXX) XXX-XX-XX
+            </a>
+
+            <a href="booking.html" class="btn btn--primary">
+                Забронировать столик
+            </a>
+
+            <!-- Кнопка бургер-меню (для мобильных, JS позже) -->
+            <button class="burger" id="burger-btn" aria-label="Открыть меню">
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="container hero__content">
+            <h1>Настоящий вкус Италии в сердце города</h1>
+            <p>Сезонное меню из фермерских продуктов</p>
+
+            <div class="hero__buttons">
+                <a href="menu.html" class="btn btn--secondary">
+                    Посмотреть меню
+                </a>
+                <a href="booking.html" class="btn btn--primary">
+                    Забронировать столик
+                </a>
+            </div>
+        </div>
+        <!-- Фоновое изображение задашь через CSS -->
+    </section>
+
+    <!-- ===== SPECIAL OFFERS ===== -->
+    <section class="offers">
+        <div class="container">
+            <h2>Специальные предложения</h2>
+
+            <div class="offers__grid">
+                <article class="offer-card">
+                    <h3>Счастливые часы</h3>
+                    <p>Скидка на аперитивы с 17:00 до 19:00</p>
+                </article>
+
+                <article class="offer-card">
+                    <h3>Воскресный семейный ужин</h3>
+                    <p>Детское меню в подарок</p>
+                </article>
+
+                <article class="offer-card">
+                    <h3>Дегустационный сет от шефа</h3>
+                    <p>Лучшие блюда в одном сете</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== POPULAR DISHES ===== -->
+    <section class="popular">
+        <div class="container">
+            <h2>Популярные блюда</h2>
+
+            <div class="popular__grid">
+                <article class="dish-card">
+                    <div class="dish-card__image"></div>
+                    <h3>Паста Карбонара</h3>
+                </article>
+
+                <article class="dish-card">
+                    <div class="dish-card__image"></div>
+                    <h3>Лимонад «Lavender Sour»</h3>
+                </article>
+
+                <article class="dish-card">
+                    <div class="dish-card__image"></div>
+                    <h3>Пицца «Четыре сыра»</h3>
+                </article>
+
+                <article class="dish-card">
+                    <div class="dish-card__image"></div>
+                    <h3>Тирамису</h3>
+                </article>
+            </div>
+
+            <div class="popular__button">
+                <a href="menu.html" class="btn btn--secondary">
+                    Всё меню
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+        <div class="container cta__content">
+            <h2>Зарезервируйте свой вечер вкуса</h2>
+            <a href="booking.html" class="btn btn--primary">
+                Забронировать онлайн
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container footer__grid">
+
+        <!-- Колонка 1 -->
+        <div class="footer__column">
+            <h3>Навигация</h3>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="menu.html">Меню</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="booking.html">Бронирование</a></li>
+            </ul>
+        </div>
+
+        <!-- Колонка 2 -->
+        <div class="footer__column">
+            <h3>Контакты</h3>
+            <p>Адрес: г. Город, ул. Итальянская, 12</p>
+            <p>Телефон: <a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a></p>
+            <p>Email: info@trattoriaverde.ru</p>
+        </div>
+
+        <!-- Колонка 3 -->
+        <div class="footer__column">
+            <h3>Часы работы</h3>
+            <p>Пн–Пт: 12:00 – 23:00</p>
+            <p>Сб–Вс: 12:00 – 00:00</p>
+        </div>
+
+        <!-- Колонка 4 -->
+        <div class="footer__column">
+            <h3>Подписка</h3>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Ваш email">
+                <button type="submit">Подписаться</button>
+            </form>
+
+            <div class="socials">
+                <a href="#">VK</a>
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Нижняя строка -->
+    <div class="footer__bottom">
+        <p>© La Trattoria Verde, 2026</p>
+        <a href="#">Политика конфиденциальности</a>
+    </div>
+</footer>
+
+<!-- Подключение JS (для бургер-меню и т.п. позже) -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
