@@ -284,25 +284,87 @@ ul {
         display: none;
     }
 /* Мобильное меню */
-.nav.active {
-    display: block;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: #0b1f1e;
-    padding: 20px 0;
-}
+@media (max-width: 900px) {
+    .offers__grid,
+    .popular__grid,
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-.nav.active .nav__list {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
+    /* Скрываем навигацию по умолчанию */
+    .nav {
+        display: none;
+    }
 
-
+    /* Показываем бургер */
     .burger {
         display: block;
+        cursor: pointer;
+        z-index: 1001;
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+
+    /* Активное меню */
+    .nav.active {
+        display: block;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #0b1f1e;
+        padding: 30px 20px;
+        z-index: 1000;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav.active .nav__list {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        padding: 0;
+    }
+
+    .nav.active .nav__list li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav.active .nav__list a {
+        display: block;
+        padding: 12px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav.active .nav__list a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Предотвращаем прокрутку body при открытом меню */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+
+    /* Фиксируем хеддер */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        padding: 15px 0;
+    }
+    
+    .header__inner {
+        position: relative;
     }
 }
 
@@ -316,5 +378,86 @@ ul {
     .hero__content h1 {
         font-size: 30px;
     }
+    
+    .nav.active {
+        top: 60px;
+        max-height: calc(100vh - 60px);
+    }
+    
+    .hero__buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .hero__buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .header__phone {
+        font-size: 13px;
+    }
+    
+    .btn {
+        padding: 10px 22px;
+        font-size: 13px;
+    }
 }
+/* Исправления для очень маленьких экранов */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 0 10px;
+    }
+    
+    .header__phone {
+        display: none;
+    }
+    
+    .header__actions {
+        gap: 10px;
+    }
+    
+    .logo {
+        font-size: 16px;
+    }
+    
+    .hero {
+        height: 85vh;
+    }
+    
+    .hero__content h1 {
+        font-size: 26px;
+    }
+    
+    .hero__content p {
+        font-size: 14px;
+    }
+    
+    .offers, .popular, .cta {
+        padding: 50px 0;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer__grid {
+        gap: 25px;
+    }
+}
+
+/* Предотвращение горизонтального скролла */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Улучшаем доступность */
+.burger:focus {
+    outline: 2px solid #9c6b5a;
+    outline-offset: 2px;
+}
+    
 
