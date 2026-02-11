@@ -35,18 +35,18 @@ body {
 .news-left {
     width: 40%;
     padding: 25px;
-    background: #89b3a9;
+    background: #243833;
 }
 
 .news-date {
     font-size: 14px;
-    color: #4b6b63;
+    color: #ffffff;
 }
 
 .news-title {
     margin: 10px 0 15px;
     font-size: 22px;
-    color: #374f49;
+    color: #ffffff;
 }
 
 .news-left img {
@@ -59,8 +59,8 @@ body {
     padding: 25px;
     display: flex;
     flex-direction: column;
-    color: #2d403b;
-    background: #abc9c2;
+    color: #ffffff;
+    background: #162e28;
 }
 
 .news-preview {
@@ -104,3 +104,4 @@ body {
         width: 100%;
     }
 }
+
