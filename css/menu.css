@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: "Georgia", serif;
     background: radial-gradient(circle at top, #0f2b2a, #050b0b);
     color: #f3f3f3;
     line-height: 1.6;
@@ -353,3 +353,4 @@ a {
     padding: 0 20px;
     margin: 0 auto;
 }
+
