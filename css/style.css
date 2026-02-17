@@ -106,7 +106,7 @@ ul {
         rgba(0, 0, 0, 0.55),
         rgba(0, 0, 0, 0.75)
     ),
-    url("../images/hero.jpg") center / cover no-repeat;
+    url("img/ONE_PIC_MAIN_PIC.png") center / cover no-repeat;
     display: flex;
     align-items: center;
     text-align: center;
@@ -183,17 +183,56 @@ ul {
     background-color: #000;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
+    /* Убираем aspect-ratio, карточка подстраивается под размер картинки */
 }
 
 .dish-card__image {
     width: 100%;
-    height: 100%;
-    background: url("../images/dish.jpg") center / cover no-repeat;
+    position: relative;
+    overflow: hidden;
+    /* Высота автоматическая, подстраивается под картинку */
 }
 
+.dish-card__image img {
+    width: 100%;
+    height: auto; /* Автоматическая высота, сохраняем пропорции */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Затемнение градиентом снизу */
+.dish-card__image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Название блюда поверх картинки */
 .dish-card h3 {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
     padding: 12px;
-    font-size: 14px;
+    font-size: 16px; /* Немного увеличил размер */
+    color: white;
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Добавил тень для лучшей читаемости */
+}
+
+/* Анимация приближения при наведении */
+.dish-card:hover .dish-card__image img {
+    transform: scale(1.1);
 }
 
 .popular__button {
@@ -460,6 +499,25 @@ html, body {
     outline: 2px solid #9c6b5a;
     outline-offset: 2px;
 }
+
+/* Адаптация для популярных блюд на разных экранах */
+@media (max-width: 900px) {
+    .popular__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .popular__grid {
+        grid-template-columns: 1fr;
+    }
     
+    .dish-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+    
+
 
 
