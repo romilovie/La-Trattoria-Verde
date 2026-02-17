@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Georgia", serif;
     background: #f4f7f5;
     color: #1f2d2a;
 }
@@ -104,4 +104,5 @@ body {
         width: 100%;
     }
 }
+
 
