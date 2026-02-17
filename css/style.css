@@ -106,7 +106,7 @@ ul {
         rgba(0, 0, 0, 0.55),
         rgba(0, 0, 0, 0.75)
     ),
-    url("img/ONE_PIC_MAIN_PIC.png") center / cover no-repeat;
+    url("../img/ONE_PIC_MAIN_PIC.png") center / cover no-repeat;
     display: flex;
     align-items: center;
     text-align: center;
@@ -518,6 +518,7 @@ html, body {
     }
 }
     
+
 
 
 
