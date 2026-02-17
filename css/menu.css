@@ -17,7 +17,7 @@ body {
     font-family: "Georgia", serif;
     background: radial-gradient(circle at top, #0f2b2a, #050b0b);
     color: #f3f3f3;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 a {
@@ -353,4 +353,5 @@ a {
     padding: 0 20px;
     margin: 0 auto;
 }
+
 
