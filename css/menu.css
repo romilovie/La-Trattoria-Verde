@@ -25,40 +25,7 @@ a {
     color: inherit;
 }
 
-/* ===== BUTTONS ===== */
-.btn {
-    display: inline-block;
-    padding: 12px 26px;
-    border-radius: 30px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: 0.3s;
-}
 
-.btn--primary {
-    background-color: #9c6b5a;
-    color: #fff;
-}
-
-.btn--primary:hover {
-    background-color: #b57d6a;
-}
-
-.btn--secondary {
-    border: 1px solid #ffffff;
-    color: #ffffff;
-}
-
-.btn--secondary:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.logo {
-    font-size: 18px;
-    letter-spacing: 2px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
 
 /* ===============================
    ВЕРХНЕЕ МЕНЮ-КАТЕГОРИИ
@@ -198,196 +165,217 @@ a {
 }
 
 /* ===============================
-   АДАПТИВ
+   ИСПРАВЛЕНИЯ ДЛЯ ХЕДЕРА
+   =============================== */
+
+/* Фикс для хедера на странице меню */
+.header {
+    background-color: #0b1f1e;
+    padding: 18px 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Стили для кнопки в хедере - копия из style.css */
+.header .btn--primary {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    background-color: #9c6b5a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.header .btn--primary:hover {
+    background-color: #b57d6a;
+}
+
+/* Телефон в хедере */
+.header__phone {
+    font-size: 14px;
+    opacity: 0.9;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Логотип */
+.logo {
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Навигация */
+.nav__list {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav__list a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.nav__list a:hover {
+    opacity: 0.8;
+}
+
+/* Правая часть хедера */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Бургер-кнопка */
+.burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Убираем возможные конфликты с menu.css */
+.menu-categories {
+    margin-top: 40px;
+}
+
+/* ===============================
+   АДАПТИВ ДЛЯ МОБИЛЬНЫХ
    =============================== */
 
 @media (max-width: 900px) {
-    .menu-categories {
-        margin: 30px 0 50px;
+    .header__actions {
+        gap: 15px;
+    }
+    
+    /* Уменьшаем размер кнопки на планшетах */
+    .header .btn--primary {
+        padding: 10px 20px;
         font-size: 13px;
     }
     
-    .menu-categories a {
-        margin: 0 6px;
-    }
-    
-    .menu-section {
-        margin-bottom: 60px;
-        padding: 0 15px;
-    }
-    
-    .menu-section h2 {
-        font-size: 32px;
-        margin-bottom: 30px;
-    }
-    
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-    }
-    
-    .menu-item {
-        min-height: 350px;
-    }
-    
-    .menu-item-title {
-        font-size: 16px;
-    }
-    
-    .menu-item-content {
-        padding: 18px;
+    .header__phone {
+        font-size: 13px;
     }
 }
 
 @media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
+    .header__phone {
+        display: none; /* Прячем телефон на средних экранах */
     }
     
-    .menu-categories {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        margin: 20px 0 40px;
+    .header .btn--primary {
+        padding: 8px 16px;
         font-size: 12px;
     }
     
-    .menu-categories a {
-        margin: 0;
-        padding: 6px 10px;
-        background: rgba(201, 161, 138, 0.1);
-        border-radius: 4px;
+    .logo {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header__actions {
+        gap: 10px;
     }
     
-    .menu-section h2 {
-        font-size: 28px;
+    /* На маленьких экранах кнопка должна быть такого же размера как на главной */
+    .header .btn--primary {
+        padding: 12px 26px; /* Возвращаем исходный размер */
+        font-size: 14px;
+        white-space: normal; /* Разрешаем перенос текста */
+        min-width: 140px; /* Минимальная ширина */
+        text-align: center;
+        line-height: 1.2;
     }
     
-    .menu-item {
-        min-height: 320px;
+    .logo {
+        font-size: 15px;
+        max-width: 150px; /* Ограничиваем ширину логотипа */
     }
 }
 
 @media (max-width: 480px) {
-    .menu-categories {
-        font-size: 11px;
-        gap: 6px;
+    .header .btn--primary {
+        padding: 10px 20px; /* Немного уменьшаем на очень маленьких */
+        font-size: 13px;
+        min-width: 130px;
     }
     
-    .menu-categories a {
-        padding: 5px 8px;
+    .logo {
+        font-size: 14px;
+        max-width: 130px;
     }
-    
-    .menu-section {
-        padding: 0 10px;
-    }
-    
-    .menu-section h2 {
-        font-size: 24px;
-        margin-bottom: 25px;
-    }
-    
-    .menu-item {
-        min-height: 300px;
-    }
-    
-    .menu-item-title {
-        font-size: 15px;
-    }
-    
-    .menu-item-content {
-        padding: 15px;
-    }
-    
-    .menu-item-desc {
+}
+
+@media (max-width: 400px) {
+    .header .btn--primary {
+        padding: 8px 16px;
         font-size: 12px;
+        min-width: 120px;
+    }
+    
+    .logo {
+        font-size: 13px;
+        max-width: 110px;
+    }
+    
+    .burger {
+        font-size: 24px;
+        width: 35px;
     }
 }
 
 /* Фикс для очень маленьких экранов */
 @media (max-width: 360px) {
-    .menu-item {
-        min-height: 280px;
+    .header__actions {
+        gap: 5px;
     }
     
-    .menu-item-title {
-        font-size: 14px;
+    .header .btn--primary {
+        padding: 8px 12px;
+        font-size: 11px;
+        min-width: 100px;
     }
     
-    .menu-categories {
-        font-size: 10px;
+    .logo {
+        font-size: 12px;
+        max-width: 100px;
     }
 }
 
-/* Исправление для мобильного меню */
-@media (max-width: 900px) {
-    /* Убедитесь, что навигация скрыта по умолчанию */
-    .nav {
-        display: none;
-    }
-    
-    .burger {
-        display: block !important;
-    }
-    
-    /* Активное меню */
-    .nav.active {
-        display: block;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #0b1f1e;
-        padding: 30px 20px;
-        z-index: 1000;
-        max-height: calc(100vh - 70px);
-        overflow-y: auto;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .nav.active .nav__list {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-        padding: 0;
-    }
-    
-    .nav.active .nav__list li {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .nav.active .nav__list a {
-        display: block;
-        padding: 12px;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    body.menu-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-    }
-    
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        padding: 15px 0;
-    }
-}
-
-/* Общие исправления для всех страниц */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-    margin: 0 auto;
-}
 
 
 
