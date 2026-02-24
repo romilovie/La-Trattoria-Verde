@@ -25,6 +25,34 @@ a {
     color: inherit;
 }
 
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn--primary {
+    background-color: #9c6b5a;
+    color: #fff;
+}
+
+.btn--primary:hover {
+    background-color: #b57d6a;
+}
+
+.btn--secondary {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn--secondary:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
 /* ===============================
    ВЕРХНЕЕ МЕНЮ-КАТЕГОРИИ
    =============================== */
@@ -353,5 +381,6 @@ a {
     padding: 0 20px;
     margin: 0 auto;
 }
+
 
 
