@@ -10,65 +10,6 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== HEADER ===== */
-.header {
-    background-color: #0b1f1e;
-    padding: 18px 0;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: 18px;
-    letter-spacing: 2px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.nav__list {
-    display: flex;
-    gap: 24px;
-    font-size: 14px;
-}
-
-.header__actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.header__phone {
-    font-size: 14px;
-    opacity: 0.9;
-}
-
-.burger {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #fff;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    line-height: 1;
-}
-
-.burger:focus {
-    outline: 2px solid #9c6b5a;
-    outline-offset: 2px;
-}
 
 /* SECTIONS */
 .section {
