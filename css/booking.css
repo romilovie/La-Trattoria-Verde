@@ -151,6 +151,233 @@ input, textarea {
     margin: 8px 0;
 }
 
+/* ===============================
+   АДАПТИВ ДЛЯ СТРАНИЦЫ БРОНИРОВАНИЯ
+   =============================== */
+
+@media (max-width: 900px) {
+    .booking {
+        padding: 30px 15px;
+    }
+    
+    .booking h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    /* Уменьшаем размеры столиков */
+    .hall {
+        grid-template-columns: 100px 160px 100px;
+        grid-template-rows: 80px 100px 80px;
+        gap: 15px;
+        margin: 30px auto;
+    }
+    
+    .table {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .table span {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hall {
+        grid-template-columns: 90px 140px 90px;
+        grid-template-rows: 70px 90px 70px;
+        gap: 12px;
+    }
+    
+    .table {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 600px) {
+    .booking h1 {
+        font-size: 24px;
+    }
+    
+    .hall {
+        grid-template-columns: 80px 120px 80px;
+        grid-template-rows: 65px 85px 65px;
+        gap: 10px;
+    }
+    
+    .table {
+        padding: 6px;
+        font-size: 12px;
+    }
+    
+    .table span {
+        font-size: 10px;
+    }
+    
+    /* ===== ИСПРАВЛЕНИЕ ДЛЯ SUMMARY ===== */
+    .summary {
+        display: block;
+        text-align: center;
+        line-height: 1.8;
+        margin: 25px 0;
+        font-size: 16px;
+    }
+    
+    .summary strong {
+        display: inline-block;
+        margin: 0 5px;
+    }
+    
+    /* Убираем вертикальную черту, добавляем перенос строки */
+    .summary::before {
+        display: none;
+    }
+    
+    .summary br {
+        display: none;
+    }
+    
+    /* Добавляем перенос строки через псевдоэлемент */
+    .summary span {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .hall {
+        grid-template-columns: 70px 100px 70px;
+        grid-template-rows: 60px 80px 60px;
+        gap: 8px;
+    }
+    
+    .table {
+        padding: 5px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+    
+    .table span {
+        font-size: 9px;
+    }
+    
+    .summary {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .hall {
+        grid-template-columns: 65px 90px 65px;
+        grid-template-rows: 55px 75px 55px;
+        gap: 6px;
+    }
+    
+    .table {
+        padding: 4px;
+    }
+}
+
+@media (max-width: 400px) {
+    .booking h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    
+    .hall {
+        grid-template-columns: 55px 80px 55px;
+        grid-template-rows: 50px 70px 50px;
+        gap: 5px;
+    }
+    
+    .table {
+        font-size: 10px;
+        padding: 3px;
+    }
+    
+    .table span {
+        font-size: 8px;
+    }
+    
+    /* Скрываем надпись "места" на совсем маленьких экранах */
+    .table span {
+        display: none;
+    }
+    
+    /* Показываем только номер и количество мест цифрой */
+    .table[data-seats="2"]::after {
+        content: " (2)";
+        font-size: 9px;
+    }
+    
+    .table[data-seats="4"]::after {
+        content: " (4)";
+        font-size: 9px;
+    }
+    
+    .table[data-seats="6"]::after {
+        content: " (6)";
+        font-size: 9px;
+    }
+    
+    .summary {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .summary br {
+        display: block;
+    }
+    
+    /* Убираем вертикальную черту */
+    .summary strong:first-of-type::before {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .hall {
+        grid-template-columns: 50px 70px 50px;
+        grid-template-rows: 45px 65px 45px;
+    }
+    
+    .table {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hall {
+        grid-template-columns: 45px 60px 45px;
+        grid-template-rows: 40px 60px 40px;
+        gap: 4px;
+    }
+    
+    .table {
+        font-size: 8px;
+    }
+    
+    .table[data-seats="2"]::after,
+    .table[data-seats="4"]::after,
+    .table[data-seats="6"]::after {
+        font-size: 7px;
+    }
+    
+    .booking h1 {
+        font-size: 20px;
+    }
+    
+    .summary {
+        font-size: 13px;
+    }
+}
+
+
+
+
 /* ================= SUCCESS PAGE ================= */
 
 .success {
@@ -194,4 +421,5 @@ input, textarea {
     border-radius: 30px;
     font-size: 14px;
     letter-spacing: 1px;
+
 }
