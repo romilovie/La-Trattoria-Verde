@@ -25,7 +25,40 @@ a {
     color: inherit;
 }
 
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
 
+.btn--primary {
+    background-color: #9c6b5a;
+    color: #fff;
+}
+
+.btn--primary:hover {
+    background-color: #b57d6a;
+}
+
+.btn--secondary {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn--secondary:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.logo {
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
 /* ===============================
    ВЕРХНЕЕ МЕНЮ-КАТЕГОРИИ
@@ -340,6 +373,12 @@ a {
         width: 100%;
     }
     
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        padding: 15px 0;
+    }
 }
 
 /* Общие исправления для всех страниц */
@@ -350,28 +389,6 @@ a {
     margin: 0 auto;
 }
 
-
-
-
-
-
-/* ===============================
-   ИСПРАВЛЕНИЯ ДЛЯ ХЕДЕРА
-   =============================== */
-
-/* Фикс для хедера на странице меню */
-
-
-/* Стили для кнопки в хедере - копия из style.css */
-
-
-/* Телефон в хедере */
-
-
-/* Логотип */
-
-
-/* Навигация */
 
 
 
