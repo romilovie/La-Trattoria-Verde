@@ -341,11 +341,19 @@ a {
     }
     
     .header {
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        padding: 15px 0;
-    }
+    background-color: #0b1f1e;
+    padding: 18px 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+   .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
 }
 
 /* Общие исправления для всех страниц */
@@ -356,26 +364,17 @@ a {
     margin: 0 auto;
 }
 
+
+
+
+
+
 /* ===============================
    ИСПРАВЛЕНИЯ ДЛЯ ХЕДЕРА
    =============================== */
 
 /* Фикс для хедера на странице меню */
-.header {
-    background-color: #0b1f1e;
-    padding: 18px 0;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
 
-.header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
 
 /* Стили для кнопки в хедере - копия из style.css */
 .header .btn--primary {
@@ -567,6 +566,7 @@ a {
         max-width: 100px;
     }
 }
+
 
 
 
