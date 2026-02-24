@@ -249,6 +249,58 @@ textarea {
     }
 }
 
+/* Фикс для точного позиционирования карточек */
+.slider-window {
+    overflow: hidden;
+    width: 330px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+    gap: 0; /* Убираем gap, используем margin на карточках */
+}
+
+.review-card {
+    min-width: 320px;
+    width: 320px; /* Фиксированная ширина */
+    margin: 0 5px; /* Отступы между карточками */
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .slider-window {
+        width: 280px;
+    }
+    
+    .review-card {
+        min-width: 270px;
+        width: 270px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-window {
+        width: 240px;
+    }
+    
+    .review-card {
+        min-width: 230px;
+        width: 230px;
+    }
+}
+
+@media (max-width: 360px) {
+    .slider-window {
+        width: 200px;
+    }
+    
+    .review-card {
+        min-width: 190px;
+        width: 190px;
+    }
+}
+
 
 
 
