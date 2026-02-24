@@ -94,103 +94,6 @@ body {
     filter: brightness(1);
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background-color: #081817;
-    padding: 60px 0 20px;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.footer__column h3 {
-    font-size: 16px;
-    margin-bottom: 15px;
-    font-family: 'Playfair Display', serif;
-}
-
-.footer__column p,
-.footer__column li {
-    font-size: 14px;
-    opacity: 0.8;
-    margin-bottom: 8px;
-}
-
-.footer__column a {
-    transition: opacity 0.3s;
-}
-
-.footer__column a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-.subscribe-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.subscribe-form input {
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-.subscribe-form input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.subscribe-form button {
-    padding: 8px 14px;
-    border: none;
-    background-color: #9c6b5a;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.subscribe-form button:hover {
-    background-color: #b57d6a;
-}
-
-.socials {
-    display: flex;
-    gap: 15px;
-    font-size: 14px;
-}
-
-.socials a {
-    opacity: 0.8;
-}
-
-.socials a:hover {
-    opacity: 1;
-}
-
-.footer__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    opacity: 0.7;
-}
-
 /* ===== МОБИЛЬНЫЕ СТИЛИ ===== */
 
 /* Планшеты */
@@ -207,10 +110,6 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .footer__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .team-cards {
         gap: 40px;
     }
@@ -220,9 +119,6 @@ body {
         display: none;
     }
 
-    .burger {
-        display: block;
-    }
 
     .nav.active {
         display: block;
@@ -267,16 +163,6 @@ body {
         width: 100%;
     }
 
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        padding: 15px 0;
-    }
-    
-    .header__inner {
-        position: relative;
-    }
 }
 
 /* Телефоны */
@@ -320,52 +206,6 @@ body {
         transform: none; /* Убираем эффект на телефонах для лучшей производительности */
     }
 
-    .footer__grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .subscribe-form {
-        flex-direction: column;
-    }
-
-    .subscribe-form input,
-    .subscribe-form button {
-        width: 100%;
-    }
-
-    .socials {
-        justify-content: center;
-    }
-
-    .footer__bottom {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .header__phone {
-        display: none; /* Прячем телефон на очень маленьких экранах */
-    }
-
-    .header__actions {
-        gap: 10px;
-    }
-
-    .logo {
-        font-size: 16px;
-    }
-
-    .btn {
-        padding: 10px 18px;
-        font-size: 13px;
-    }
-
-    .btn--primary {
-        white-space: nowrap;
-    }
-
     .nav.active {
         top: 62px;
         max-height: calc(100vh - 62px);
@@ -374,14 +214,6 @@ body {
 
 /* Очень маленькие телефоны */
 @media (max-width: 380px) {
-    .logo {
-        font-size: 14px;
-    }
-
-    .btn--primary {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
 
     .section h2 {
         font-size: 28px;
