@@ -5,30 +5,36 @@ h1 {
 }
 /* ===== СЛАЙДЕР ===== */
 .reviews-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 100%;
+    padding: 0 10px;
 }
 
 .slider-window {
-  width: 330px;
-  overflow: hidden;
+    width: 330px;
+    overflow: hidden;
+    position: relative;
 }
 
 .slider-track {
-  display: flex;
-  transition: transform 0.3s ease;
+    display: flex;
+    transition: transform 0.3s ease;
+    gap: 0; /* Убираем gap */
 }
 
 .review-card {
-  min-width: 320px;
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  margin: 0 10px;
-  position: relative;
-  color: #1f3627;
+    flex: 0 0 auto; /* Запрещаем сжиматься и растягиваться */
+    width: 300px; /* Базовая ширина */
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 0 10px; /* Отступы справа и слева */
+    position: relative;
+    color: #1f3627;
+    box-sizing: border-box;
 }
 
 .review-card h3 {
@@ -138,37 +144,14 @@ textarea {
    =============================== */
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 28px;
-        margin: 20px 0;
-    }
-    
-    .reviews-slider {
-        gap: 5px;
-        padding: 0 10px;
-    }
-    
     .slider-window {
         width: 280px;
     }
     
     .review-card {
-        min-width: 260px;
+        width: 250px;
         padding: 15px;
-        margin: 0 5px;
-    }
-    
-    .review-card h3 {
-        font-size: 16px;
-    }
-    
-    .review-card .text {
-        font-size: 13px;
-    }
-    
-    .arrow {
-        font-size: 24px;
-        padding: 4px 10px;
+        margin: 0 10px;
     }
 }
 
@@ -178,74 +161,26 @@ textarea {
         margin: 15px 0;
     }
     
-    .reviews-slider {
-        gap: 3px;
-        padding: 0 5px;
-    }
-    
     .slider-window {
         width: 240px;
     }
     
     .review-card {
-        min-width: 220px;
+        width: 210px;
         padding: 12px;
-    }
-    
-    .review-card h3 {
-        font-size: 15px;
-        margin-bottom: 8px;
-    }
-    
-    .review-card .text {
-        font-size: 12px;
-        line-height: 1.4;
-    }
-    
-    .review-card .rating {
-        font-size: 14px;
-    }
-    
-    .review-card .date {
-        font-size: 11px;
-    }
-    
-    .arrow {
-        font-size: 20px;
-        padding: 3px 8px;
-    }
-    
-    .add-review button {
-        padding: 10px 16px;
-        font-size: 14px;
+        margin: 0 10px;
     }
 }
 
 @media (max-width: 360px) {
-    h1 {
-        font-size: 22px;
-    }
-    
     .slider-window {
         width: 200px;
     }
     
     .review-card {
-        min-width: 180px;
+        width: 170px;
         padding: 10px;
-    }
-    
-    .review-card h3 {
-        font-size: 14px;
-    }
-    
-    .review-card .text {
-        font-size: 11px;
-    }
-    
-    .arrow {
-        font-size: 18px;
-        padding: 2px 6px;
+        margin: 0 10px;
     }
 }
 
@@ -300,6 +235,8 @@ textarea {
         width: 190px;
     }
 }
+
+
 
 
 
