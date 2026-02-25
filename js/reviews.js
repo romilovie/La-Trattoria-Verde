@@ -2,32 +2,41 @@
 const track = document.getElementById('reviewsList');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
+const sliderWindow = document.querySelector('.slider-window');
 
 let index = 0;
-let cardWidth = 340; // стандартная ширина на десктопе
 
-// Функция для определения ширины карточки в зависимости от экрана
+// Функция для получения ширины одной карточки с учетом отступов
 function getCardWidth() {
-    if (window.innerWidth <= 360) {
-        return 220; // для очень маленьких экранов (ширина карточки + отступы)
-    } else if (window.innerWidth <= 480) {
-        return 260; // для маленьких экранов
-    } else if (window.innerWidth <= 768) {
-        return 300; // для планшетов
-    } else {
-        return 340; // для десктопов
-    }
+    if (track.children.length === 0) return 0;
+    const firstCard = track.children[0];
+    // Получаем полную ширину карточки включая margin
+    return firstCard.offsetWidth + 
+           parseInt(getComputedStyle(firstCard).marginLeft) + 
+           parseInt(getComputedStyle(firstCard).marginRight);
+}
+
+// Функция для получения ширины окна слайдера
+function getWindowWidth() {
+    return sliderWindow.offsetWidth;
 }
 
 function updateSlider() {
-    // Обновляем ширину карточки при каждом сдвиге
-    cardWidth = getCardWidth();
+    const cardWidth = getCardWidth();
+    const windowWidth = getWindowWidth();
+    
+    // Проверяем, чтобы индекс не уходил за пределы
+    const maxIndex = Math.max(0, track.children.length - 1);
+    if (index > maxIndex) {
+        index = maxIndex;
+    }
+    
+    // Сдвигаем ровно на ширину карточки
     track.style.transform = `translateX(-${index * cardWidth}px)`;
 }
 
 nextBtn.onclick = () => {
-    const maxIndex = track.children.length - 1;
-    if (index < maxIndex) {
+    if (index < track.children.length - 1) {
         index++;
         updateSlider();
     }
@@ -42,7 +51,11 @@ prevBtn.onclick = () => {
 
 // Обновляем при изменении размера окна
 window.addEventListener('resize', () => {
-    // Пересчитываем позицию при изменении размера
+    updateSlider();
+});
+
+// Вызываем после загрузки страницы
+window.addEventListener('load', () => {
     updateSlider();
 });
 
@@ -91,4 +104,8 @@ document.getElementById('submitReview').onclick = () => {
     // Очищаем форму
     document.getElementById('nameInput').value = '';
     document.getElementById('textInput').value = '';
+    
+    // Сбрасываем индекс и обновляем слайдер
+    index = 0;
+    updateSlider();
 };
