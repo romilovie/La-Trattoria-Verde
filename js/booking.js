@@ -1,7 +1,7 @@
 // Конфигурация Supabase - ВСТАВЬТЕ СВОИ ДАННЫЕ!
-const supabaseUrl = 'https://yygbwpfckmwwuiudpiif.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+//const supabaseUrl = 'https://yygbwpfckmwwuiudpiif.supabase.co';
+//const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4';
+//const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Элементы DOM
 const tables = document.querySelectorAll('.table.free');
@@ -301,6 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Очищаем старые брони
     cleanupOldBookings();
 });
+
 
 
 
