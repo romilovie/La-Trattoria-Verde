@@ -698,4 +698,57 @@ input, textarea {
     }
 }
 
+/* Стили для простого календаря */
+.calendar-wrapper {
+    margin-bottom: 20px;
+}
+
+.calendar-wrapper label {
+    display: block;
+    margin-bottom: 8px;
+    color: #9c6b5a;
+    font-size: 14px;
+}
+
+.date-picker {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #9c6b5a;
+    background: #1f4d45;
+    color: #fff;
+    font-size: 16px;
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Стили для времени */
+.time.past {
+    background: #444;
+    border-color: #444;
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.time.busy {
+    background: #828282;
+    border-color: #828282;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.loading, .error {
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+
 
