@@ -6,7 +6,6 @@
     <title>Бронирование | La Trattoria Verde</title>
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
@@ -36,10 +35,11 @@
 <main class="booking">
     <h1>Выберите дату и время</h1>
     
-    <!-- Календарь над столами -->
+    <!-- Простой HTML5 календарь -->
     <div class="date-time-selection">
         <div class="calendar-wrapper">
-            <input type="text" id="datePicker" class="date-picker" placeholder="Выберите дату">
+            <label for="bookingDate">Выберите дату:</label>
+            <input type="date" id="bookingDate" class="date-picker" min="">
         </div>
         
         <div class="time-slots">
@@ -97,7 +97,7 @@
 
         <form id="bookingForm">
             <div class="form-group">
-                <input type="text" id="name" placeholder="Имя*" required pattern="[A-Za-zА-Яа-я\s]{2,}" title="Введите корректное имя (минимум 2 буквы)">
+                <input type="text" id="name" placeholder="Имя*" required>
             </div>
             
             <div class="form-group">
@@ -105,7 +105,7 @@
             </div>
             
             <div class="form-group">
-                <input type="email" id="email" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Введите корректный email (пример: name@domain.com)">
+                <input type="email" id="email" placeholder="Email">
             </div>
             
             <div class="form-group">
@@ -161,13 +161,14 @@
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- Подключение скриптов -->
 <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/booking.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
+
 
 
 
