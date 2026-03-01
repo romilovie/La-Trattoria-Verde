@@ -1,11 +1,10 @@
-// Конфигурация Supabase
+// Конфигурация Supabase - ВСТАВЬТЕ СВОИ ДАННЫЕ!
 const supabaseUrl = 'https://yygbwpfckmwwuiudpiif.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Элементы DOM
 const tables = document.querySelectorAll('.table.free');
-const continueBtn = document.getElementById('continueBtn');
 const tablesCount = document.getElementById('tablesCount');
 const seatsCount = document.getElementById('seatsCount');
 const bookingInfo = document.getElementById('bookingInfo');
@@ -13,29 +12,27 @@ const bookingForm = document.getElementById('bookingForm');
 const bookingFormContainer = document.getElementById('bookingFormContainer');
 const submitBtn = document.getElementById('submitBooking');
 const timeSlots = document.getElementById('timeSlots');
+const dateInput = document.getElementById('bookingDate');
+const phoneInput = document.getElementById('phone');
 
 // Состояние приложения
 let selectedTables = [];
 let selectedDate = null;
 let selectedTime = null;
-let availableTimeSlots = [];
 let busyTables = [];
 
-// Инициализация Flatpickr для календаря
-flatpickr("#datePicker", {
-    minDate: "today",
-    dateFormat: "Y-m-d",
-    onChange: function(selectedDates, dateStr, instance) {
-        selectedDate = dateStr;
-        loadAvailableTimeSlots(dateStr);
-        resetTableSelection();
-    }
-});
+// Устанавливаем минимальную дату - сегодня
+const today = new Date().toISOString().split('T')[0];
+dateInput.min = today;
+dateInput.value = today; // Устанавливаем сегодня как значение по умолчанию
+selectedDate = today;
 
 // Маска для телефона
-Inputmask("+7 (999) 999-99-99").mask(document.getElementById('phone'));
+if (phoneInput) {
+    Inputmask("+7 (999) 999-99-99").mask(phoneInput);
+}
 
-// Валидация email в реальном времени
+// Валидация email
 document.getElementById('email').addEventListener('input', function(e) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (this.value && !emailPattern.test(this.value)) {
@@ -43,16 +40,32 @@ document.getElementById('email').addEventListener('input', function(e) {
     } else {
         this.setCustomValidity('');
     }
+    validateForm();
 });
 
-// Загрузка доступного времени с проверкой прошедшего времени
-async function loadAvailableTimeSlots(date) {
-    const timeSlotsContainer = document.getElementById('timeSlots');
-    timeSlotsContainer.innerHTML = '<div class="loading">Загрузка...</div>';
+// Слушатель изменения даты
+dateInput.addEventListener('change', function(e) {
+    selectedDate = e.target.value;
+    console.log('Выбрана дата:', selectedDate);
     
-    // Базовые временные слоты
+    // Сбрасываем выбранное время и столы
+    selectedTime = null;
+    selectedTables = [];
+    document.querySelectorAll('.time.selected').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.table.selected').forEach(el => el.classList.remove('selected'));
+    updateSummary();
+    
+    // Загружаем доступное время для выбранной даты
+    loadAvailableTimeSlots(selectedDate);
+});
+
+// Загрузка доступного времени
+async function loadAvailableTimeSlots(date) {
+    timeSlots.innerHTML = '<div class="loading">Загрузка...</div>';
+    
+    // Все возможные временные слоты
     const allTimeSlots = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
-                          '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+                          '18:00', '19:00', '20:00', '21:00', '22:00'];
     
     try {
         // Получаем занятые слоты из базы данных
@@ -69,10 +82,10 @@ async function loadAvailableTimeSlots(date) {
         const now = new Date();
         const currentHour = now.getHours();
         const currentMinutes = now.getMinutes();
-        const isToday = date === new Date().toISOString().split('T')[0];
+        const isToday = date === today;
 
         // Очищаем и заполняем слоты
-        timeSlotsContainer.innerHTML = '';
+        timeSlots.innerHTML = '';
         
         allTimeSlots.forEach(time => {
             const [hours, minutes] = time.split(':').map(Number);
@@ -94,18 +107,12 @@ async function loadAvailableTimeSlots(date) {
                 timeButton.addEventListener('click', () => selectTime(timeButton, time));
             }
             
-            timeSlotsContainer.appendChild(timeButton);
-        });
-        
-        availableTimeSlots = allTimeSlots.filter(time => {
-            const [hours, minutes] = time.split(':').map(Number);
-            return !busyTimeSlots.includes(time) && 
-                   (!isToday || hours > currentHour || (hours === currentHour && minutes > currentMinutes));
+            timeSlots.appendChild(timeButton);
         });
         
     } catch (error) {
         console.error('Ошибка загрузки времени:', error);
-        timeSlotsContainer.innerHTML = '<div class="error">Ошибка загрузки</div>';
+        timeSlots.innerHTML = '<div class="error">Ошибка загрузки</div>';
     }
 }
 
@@ -114,6 +121,7 @@ function selectTime(button, time) {
     document.querySelectorAll('.time').forEach(b => b.classList.remove('selected'));
     button.classList.add('selected');
     selectedTime = time;
+    console.log('Выбрано время:', time);
     
     // Загружаем занятые столы для выбранной даты и времени
     loadBusyTables(selectedDate, selectedTime);
@@ -144,8 +152,8 @@ async function loadBusyTables(date, time) {
 // Обновление статуса столов
 function updateTablesStatus() {
     tables.forEach(table => {
-        const tableId = table.dataset.id;
-        if (busyTables.includes(parseInt(tableId))) {
+        const tableId = parseInt(table.dataset.id);
+        if (busyTables.includes(tableId)) {
             table.classList.remove('free', 'selected');
             table.classList.add('busy');
         } else {
@@ -172,8 +180,6 @@ tables.forEach(table => {
             return;
         }
         
-        const id = table.dataset.id;
-        
         if (selectedTables.includes(table)) {
             table.classList.remove('selected');
             selectedTables = selectedTables.filter(t => t !== table);
@@ -183,18 +189,19 @@ tables.forEach(table => {
         }
         
         updateSummary();
+        checkFormVisibility();
     });
 });
 
 function updateSummary() {
     tablesCount.textContent = selectedTables.length;
     seatsCount.textContent = selectedTables.reduce((sum, t) => sum + Number(t.dataset.seats), 0);
-    
-    // Показываем форму, если выбраны столы, дата и время
+}
+
+function checkFormVisibility() {
     if (selectedTables.length > 0 && selectedDate && selectedTime) {
         bookingFormContainer.style.display = 'block';
         updateBookingInfo();
-        validateForm();
     } else {
         bookingFormContainer.style.display = 'none';
     }
@@ -217,10 +224,12 @@ function validateForm() {
     const email = document.getElementById('email').value;
     
     const nameValid = name.length >= 2;
-    const phoneValid = phone.match(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/);
+    const phoneValid = phone && phone.match(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/);
     const emailValid = !email || email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
     
-    submitBtn.disabled = !(nameValid && phoneValid && emailValid && selectedTables.length > 0);
+    if (submitBtn) {
+        submitBtn.disabled = !(nameValid && phoneValid && emailValid && selectedTables.length > 0);
+    }
 }
 
 // События ввода для валидации
@@ -229,47 +238,43 @@ document.getElementById('phone').addEventListener('input', validateForm);
 document.getElementById('email').addEventListener('input', validateForm);
 
 // Отправка формы
-bookingForm.onsubmit = async (e) => {
-    e.preventDefault();
-    
-    if (submitBtn.disabled) return;
-    
-    const bookingData = {
-        booking_date: selectedDate,
-        booking_time: selectedTime,
-        table_ids: selectedTables.map(t => parseInt(t.dataset.id)),
-        customer_name: document.getElementById('name').value,
-        customer_phone: document.getElementById('phone').value,
-        customer_email: document.getElementById('email').value || null,
-        comments: document.getElementById('comments').value || null,
-        created_at: new Date().toISOString()
+if (bookingForm) {
+    bookingForm.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        if (submitBtn.disabled) return;
+        
+        const bookingData = {
+            booking_date: selectedDate,
+            booking_time: selectedTime,
+            table_ids: selectedTables.map(t => parseInt(t.dataset.id)),
+            customer_name: document.getElementById('name').value,
+            customer_phone: document.getElementById('phone').value,
+            customer_email: document.getElementById('email').value || null,
+            comments: document.getElementById('comments').value || null,
+            created_at: new Date().toISOString()
+        };
+        
+        console.log('Отправка данных:', bookingData);
+        
+        try {
+            const { data, error } = await supabase
+                .from('bookings')
+                .insert([bookingData]);
+
+            if (error) throw error;
+            
+            alert('Бронирование успешно создано!');
+            window.location.href = 'booking-success.html';
+            
+        } catch (error) {
+            console.error('Ошибка при бронировании:', error);
+            alert('Произошла ошибка при бронировании: ' + error.message);
+        }
     };
-    
-    try {
-        const { data, error } = await supabase
-            .from('bookings')
-            .insert([bookingData]);
-
-        if (error) throw error;
-        
-        alert('Бронирование успешно создано!');
-        window.location.href = 'booking-success.html';
-        
-    } catch (error) {
-        console.error('Ошибка при бронировании:', error);
-        alert('Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.');
-    }
-};
-
-function resetTableSelection() {
-    selectedTables = [];
-    selectedTime = null;
-    document.querySelectorAll('.table.selected').forEach(t => t.classList.remove('selected'));
-    document.querySelectorAll('.time.selected').forEach(t => t.classList.remove('selected'));
-    updateSummary();
 }
 
-// Очистка устаревших броней (запускается при загрузке страницы)
+// Очистка устаревших броней
 async function cleanupOldBookings() {
     const today = new Date().toISOString().split('T')[0];
     
@@ -286,7 +291,17 @@ async function cleanupOldBookings() {
     }
 }
 
-// Запускаем очистку при загрузке
-cleanupOldBookings();
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Страница загружена');
+    
+    // Загружаем временные слоты для сегодняшней даты
+    loadAvailableTimeSlots(today);
+    
+    // Очищаем старые брони
+    cleanupOldBookings();
+});
+
+
 
 
