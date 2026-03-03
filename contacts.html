@@ -58,7 +58,7 @@
     <section class="contacts-info">
         <h1>Контактные данные</h1>
 
-        <p><strong>Адрес:</strong><br>ул. Цветочная, д. 10, г. Москва.</p>
+        <p><strong>Адрес:</strong><br>ул. Мореходная, д. 3, г. Калининград.</p>
 
         <p><strong>Телефон:</strong><br>
             +7 (495) 123-45-67 (для брони)<br>
@@ -73,15 +73,15 @@
         </p>
     </section>
 
-    <!-- КАРТА -->
+    <!-- КАРТА С МЕТКОЙ -->
     <section class="map-section">
         <a class="map-link"
-           href="https://yandex.ru/maps/?text=ул.%20Цветочная,%2010,%20Москва"
+           href="https://yandex.ru/maps/?whatshere[point]=20.4725,54.7079&whatshere[zoom]=17"
            target="_blank"
            aria-label="Открыть в Яндекс Картах">
 
             <iframe
-                src="https://yandex.ru/map-widget/v1/?text=ул.%20Цветочная,%2010,%20Москва&z=15"
+                src="https://yandex.ru/map-widget/v1/?ll=20.4725,54.7079&z=17&pt=20.4725,54.7079,pm2blm"
                 allowfullscreen>
             </iframe>
 
@@ -96,10 +96,15 @@
         <h2>Задать вопрос</h2>
 
         <form id="contactForm">
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Сообщение" rows="5" required></textarea>
-            <button type="submit">Отправить вопрос</button>
+            <input type="text" id="name" placeholder="Ваше имя" required>
+            <input type="tel" id="phone" placeholder="+7 (999) 999-99-99" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <div class="textarea-wrapper">
+                <textarea id="message" placeholder="Сообщение" rows="5" maxlength="500" required></textarea>
+                <span class="char-counter" id="charCounter">0/500</span>
+            </div>
+            <button type="submit" id="submitBtn">Отправить вопрос</button>
+            <div id="formStatus" class="form-status"></div>
         </form>
     </section>
 
@@ -123,7 +128,7 @@
         <!-- Колонка 2 -->
         <div class="footer__column">
             <h3>Контакты</h3>
-            <p>Адрес: г. Москва, ул. Цветочная, 10</p>
+            <p>Адрес: г. Калининград, ул. Мореходная, 3</p>
             <p>Телефон: <a href="tel:+74951234568">+7 (495) 123-45-68</a></p>
             <p>Email: info@trattoriaverde.ru</p>
         </div>
@@ -159,11 +164,14 @@
     </div>
 </footer>
 
+<!-- Подключение Supabase и .js файлов -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/contacts.js"></script>
 <script src="js/script.js"></script>
 
 </body>
 </html>
+
 
 
 
