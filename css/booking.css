@@ -29,8 +29,8 @@ header {
 /* ===== СХЕМА ЗАЛА ===== */
 .hall {
     display: grid;
-    grid-template-columns: 140px 220px 140px;
-    grid-template-rows: 100px 120px 100px;
+    grid-template-columns: 166px 166px 166px;
+    grid-template-rows: 106px 106px 106px;
     gap: 20px;
     justify-content: center;
     margin: 40px auto;
@@ -167,8 +167,8 @@ input, textarea {
     
     /* Уменьшаем размеры столиков */
     .hall {
-        grid-template-columns: 100px 160px 100px;
-        grid-template-rows: 80px 100px 80px;
+        grid-template-columns: 120px 120px 120px;
+        grid-template-rows: 86px 86px 86px;
         gap: 15px;
         margin: 30px auto;
     }
@@ -185,8 +185,8 @@ input, textarea {
 
 @media (max-width: 768px) {
     .hall {
-        grid-template-columns: 90px 140px 90px;
-        grid-template-rows: 70px 90px 70px;
+        grid-template-columns: 106px 106px 106px;
+        grid-template-rows: 76px 76px 76px;
         gap: 12px;
     }
     
@@ -201,8 +201,8 @@ input, textarea {
     }
     
     .hall {
-        grid-template-columns: 80px 120px 80px;
-        grid-template-rows: 65px 85px 65px;
+        grid-template-columns: 93px 93px 93px;
+        grid-template-rows: 71px 71px 71px;
         gap: 10px;
     }
     
@@ -247,8 +247,8 @@ input, textarea {
 
 @media (max-width: 500px) {
     .hall {
-        grid-template-columns: 70px 100px 70px;
-        grid-template-rows: 60px 80px 60px;
+        grid-template-columns: 80px 80px 80px;
+        grid-template-rows: 66px 66px 66px;
         gap: 8px;
     }
     
@@ -269,8 +269,8 @@ input, textarea {
 
 @media (max-width: 450px) {
     .hall {
-        grid-template-columns: 65px 90px 65px;
-        grid-template-rows: 55px 75px 55px;
+        grid-template-columns: 73px 73px 73px;
+        grid-template-rows: 61px 61px 61px;
         gap: 6px;
     }
     
@@ -286,8 +286,8 @@ input, textarea {
     }
     
     .hall {
-        grid-template-columns: 55px 80px 55px;
-        grid-template-rows: 50px 70px 50px;
+        grid-template-columns: 63px 63px 63px;
+        grid-template-rows: 56px 56px 56px;
         gap: 5px;
     }
     
@@ -340,8 +340,8 @@ input, textarea {
 
 @media (max-width: 360px) {
     .hall {
-        grid-template-columns: 50px 70px 50px;
-        grid-template-rows: 45px 65px 45px;
+        grid-template-columns: 56px 56px 56px;
+        grid-template-rows: 51px 51px 51px;
     }
     
     .table {
@@ -351,8 +351,8 @@ input, textarea {
 
 @media (max-width: 320px) {
     .hall {
-        grid-template-columns: 45px 60px 45px;
-        grid-template-rows: 40px 60px 40px;
+        grid-template-columns: 50px 50px 50px;
+        grid-template-rows: 46px 46px 46px;
         gap: 4px;
     }
     
@@ -749,6 +749,7 @@ input, textarea {
 .error {
     color: #ff6b6b;
 }
+
 
 
 
