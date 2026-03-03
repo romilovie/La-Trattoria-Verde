@@ -1,8 +1,10 @@
+/* Основные стили для страницы отзывов */
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin: 30px 0;
+  color: #ffffff;
 }
+
 /* ===== СЛАЙДЕР ===== */
 .reviews-slider {
     display: flex;
@@ -11,138 +13,241 @@ h1 {
     gap: 10px;
     max-width: 100%;
     padding: 0 10px;
+    margin-bottom: 40px;
 }
 
 .slider-window {
     width: 330px;
     overflow: hidden;
     position: relative;
+    touch-action: pan-y pinch-zoom;
 }
 
 .slider-track {
     display: flex;
     transition: transform 0.3s ease;
-    gap: 0; /* Убираем gap */
+    gap: 0;
+    will-change: transform;
 }
 
 .review-card {
-    flex: 0 0 auto; /* Запрещаем сжиматься и растягиваться */
-    width: 300px; /* Базовая ширина */
-    background: #fff;
+    flex: 0 0 auto;
+    width: 300px;
+    background: #ffffff;
     border-radius: 14px;
     padding: 20px;
-    margin: 0 10px; /* Отступы справа и слева */
+    margin: 0 10px;
     position: relative;
     color: #1f3627;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
+    max-height: 350px;
 }
 
 .review-card h3 {
-  margin-top: 0;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #1f3627;
+    padding-right: 40px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.review-card .text {
+    flex: 1;
+    margin: 10px 0;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #2d4736;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    padding-right: 5px;
+    max-height: 150px;
+}
+
+.review-card .text::-webkit-scrollbar {
+    width: 4px;
+}
+
+.review-card .text::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.review-card .text::-webkit-scrollbar-thumb {
+    background: #9c6b5a;
+    border-radius: 4px;
+}
+
+.review-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    border-top: 1px solid rgba(31, 54, 39, 0.1);
+    padding-top: 10px;
 }
 
 .review-card .rating {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  color: #f5b400;
+    color: #f5b400;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 .review-card .date {
-  font-size: 13px;
-  opacity: 0.6;
-  color: #2d4736;
+    font-size: 12px;
+    opacity: 0.6;
+    color: #2d4736;
 }
 
 /* ===== СТРЕЛКИ ===== */
 .arrow {
-  border: none;
-  background: rgba(46, 75, 45, 0.8);
-  font-size: 28px;
-  padding: 6px 12px;
-  border-radius: 50%;
-  cursor: pointer;
+    border: none;
+    background: #9c6b5a;
+    color: white;
+    font-size: 28px;
+    padding: 6px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+    line-height: 1;
 }
 
-/* ===== КНОПКА ===== */
-.add-review {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+.arrow:hover {
+    background: #b57d6a;
 }
 
-.add-review button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 30px;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
+.arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
-/* ===== МОДАЛКА ===== */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: none;
-  justify-content: center;
-  align-items: center;
+/* ===== ФОРМА ОТЗЫВА ===== */
+.review-form-section {
+    max-width: 500px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
 }
 
-.modal-content {
-  background: #8db098;
-  border-radius: 16px;
-  padding: 20px;
-  width: 300px;
-  position: relative;
+.form-toggle {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  cursor: pointer;
-  font-size: 22px;
+.btn-form-toggle {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #9c6b5a;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* ===== ЗВЁЗДЫ ===== */
+.btn-form-toggle:hover {
+    background: #b57d6a;
+}
+
+.form-container {
+    background: #8db098;
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.form-container.hidden {
+    display: none;
+}
+
+.form-container h2 {
+    color: #1f3627;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stars {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .stars span {
-  font-size: 26px;
-  cursor: pointer;
-  color: #ccc;
+    font-size: 32px;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.2s;
 }
 
 .stars span.active {
-  color: #f5b400;
+    color: #f5b400;
 }
 
-input, textarea {
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px;
+#nameInput,
+#textInput {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #7a9a86;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    color: #1f3627;
 }
 
-textarea {
-  resize: none;
-  height: 80px;
+#nameInput:focus,
+#textInput:focus {
+    outline: none;
+    border-color: #9c6b5a;
 }
 
-.modal-content button {
-  margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  background: #000;
-  color: #fff;
+#textInput {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
 }
 
+.char-counter {
+    text-align: right;
+    font-size: 12px;
+    color: #1f3627;
+    margin: -10px 0 15px;
+    opacity: 0.8;
+}
 
-/* ===============================
-   АДАПТИВ ДЛЯ СТРАНИЦЫ ОТЗЫВОВ
-   =============================== */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
+.btn-submit:hover {
+    background: #333333;
+}
+
+.thank-you-message {
+    text-align: center;
+    color: #1f3627;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+}
+
+.thank-you-message.hidden {
+    display: none;
+}
+
+/* ===== АДАПТИВ ===== */
 @media (max-width: 768px) {
     .slider-window {
         width: 280px;
@@ -150,15 +255,27 @@ textarea {
     
     .review-card {
         width: 250px;
-        padding: 15px;
-        margin: 0 10px;
+        min-height: 280px;
+    }
+    
+    .review-card .text {
+        max-height: 140px;
+    }
+    
+    .arrow {
+        font-size: 24px;
+        padding: 4px 12px;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 24px;
-        margin: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .reviews-slider {
+        gap: 5px;
     }
     
     .slider-window {
@@ -166,75 +283,54 @@ textarea {
     }
     
     .review-card {
-        width: 210px;
-        padding: 12px;
-        margin: 0 10px;
+        width: 220px;
+        padding: 15px;
+        min-height: 260px;
+    }
+    
+    .review-card h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .review-card .text {
+        font-size: 13px;
+        max-height: 130px;
+    }
+    
+    .arrow {
+        display: none; /* Стрелки скрыты на мобильных */
+    }
+    
+    .slider-window {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+    
+    .stars span {
+        font-size: 28px;
     }
 }
 
 @media (max-width: 360px) {
     .slider-window {
+        max-width: 240px;
+    }
+    
+    .review-card {
         width: 200px;
+        min-height: 250px;
     }
     
-    .review-card {
-        width: 170px;
-        padding: 10px;
-        margin: 0 10px;
+    .review-card .text {
+        max-height: 120px;
     }
 }
 
-/* Фикс для точного позиционирования карточек */
-.slider-window {
-    overflow: hidden;
-    width: 330px;
-}
-
-.slider-track {
-    display: flex;
-    transition: transform 0.3s ease;
-    gap: 0; /* Убираем gap, используем margin на карточках */
-}
-
-.review-card {
-    min-width: 320px;
-    width: 320px; /* Фиксированная ширина */
-    margin: 0 5px; /* Отступы между карточками */
-    box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-    .slider-window {
-        width: 280px;
-    }
-    
-    .review-card {
-        min-width: 270px;
-        width: 270px;
-    }
-}
-
-@media (max-width: 480px) {
-    .slider-window {
-        width: 240px;
-    }
-    
-    .review-card {
-        min-width: 230px;
-        width: 230px;
-    }
-}
-
-@media (max-width: 360px) {
-    .slider-window {
-        width: 200px;
-    }
-    
-    .review-card {
-        min-width: 190px;
-        width: 190px;
-    }
-}
 
 
 
