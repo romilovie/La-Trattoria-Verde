@@ -2,12 +2,12 @@
 const SUPABASE_URL = 'https://yygbwpfckmwwuiudpiif.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4'; 
 
-// Создаем клиент Supabase
-const supabase = window.supabase?.createClient 
+// Создаем клиент Supabase (используем другое имя переменной)
+const supabaseClient = window.supabase?.createClient 
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-if (!supabase) {
+if (!supabaseClient) {
     console.warn('Supabase client not initialized. Make sure to include the Supabase library.');
 }
 
@@ -230,13 +230,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Сохранение в Supabase
     async function saveToDatabase(formData) {
-        if (!supabase) {
+        if (!supabaseClient) {
             throw new Error('Supabase client not initialized');
         }
 
         console.log('Attempting to save to Supabase:', formData);
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('feedback_messages')
             .insert([
                 {
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Form data prepared:', formData);
 
             // Сохраняем в Supabase
-            if (supabase) {
+            if (supabaseClient) {
                 await saveToDatabase(formData);
                 
                 // Показываем сообщение об успехе
@@ -346,5 +346,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 
