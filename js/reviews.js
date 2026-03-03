@@ -1,111 +1,348 @@
-// ===== СЛАЙДЕР =====
+// ===== ИНИЦИАЛИЗАЦИЯ SUPABASE =====
+const SUPABASE_URL = 'https://yygbwpfckmwwuiudpiif.supabase.co'; 
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4'; 
+
+// Создаем клиент Supabase
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// функция проверки подключения
+async function testConnection() {
+    try {
+        console.log('Testing Supabase connection...');
+        const { data, error } = await supabaseClient
+            .from('reviews')
+            .select('count', { count: 'exact', head: true });
+        
+        if (error) {
+            console.error('Connection test failed:', error);
+            return false;
+        }
+        console.log('Connection test successful!');
+        return true;
+    } catch (error) {
+        console.error('Connection test error:', error);
+        return false;
+    }
+}
+
+// Вызовите при загрузке
+testConnection();
+
+// ===== ЭЛЕМЕНТЫ =====
 const track = document.getElementById('reviewsList');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
-const sliderWindow = document.querySelector('.slider-window');
+const sliderWindow = document.getElementById('sliderWindow');
+const toggleFormBtn = document.getElementById('toggleFormBtn');
+const formContainer = document.getElementById('formContainer');
+const nameInput = document.getElementById('nameInput');
+const textInput = document.getElementById('textInput');
+const charCounter = document.getElementById('charCounter');
+const submitBtn = document.getElementById('submitReview');
+const thankYouMessage = document.getElementById('thankYouMessage');
+const stars = document.querySelectorAll('.stars span');
 
-let index = 0;
+let currentIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+let rating = 5;
 
-// Функция для получения ширины одной карточки с учетом отступов
+// ===== ЗАГРУЗКА ОТЗЫВОВ =====
+async function loadReviews() {
+    try {
+        // Проверяем, что клиент инициализирован правильно
+        if (!supabaseClient || !supabaseClient.from) {
+            console.error('Supabase client not initialized properly');
+            // Если клиент не работает, показываем только фиктивные отзывы
+            track.innerHTML = '';
+            addDummyReviews();
+            updateSlider();
+            updateButtons();
+            return;
+        }
+
+        const { data, error } = await supabaseClient
+            .from('reviews')
+            .select('*')
+            .order('created_at', { ascending: true });
+
+        if (error) throw error;
+
+        // Очищаем трек
+        track.innerHTML = '';
+
+        // Добавляем фиктивные отзывы (они всегда будут первыми)
+        addDummyReviews();
+
+        // Добавляем отзывы из БД
+        if (data && data.length > 0) {
+            data.forEach(review => {
+                addReviewCard(review.name, review.text, review.rating, review.created_at);
+            });
+        }
+
+        updateSlider();
+        updateButtons();
+    } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+        // Если ошибка, показываем хотя бы фиктивные
+        track.innerHTML = '';
+        addDummyReviews();
+        updateSlider();
+        updateButtons();
+    }
+}
+
+// ===== ФИКТИВНЫЕ ОТЗЫВЫ =====
+function addDummyReviews() {
+    const dummyReviews = [
+        { name: 'Марк', text: 'Обожаю это место! Атмосфера — чистая Италия. Карбонара здесь просто божественная, а тирамису — лучший в городе. Уже рекомендовал всем друзьям!', rating: 5, date: '2026-05-21' },
+        { name: 'Катя и команда', text: 'Отметили здесь день рождения отделом — всё было идеально! Заказ на 12 человек выполнили безупречно, все в восторге от пиццы и стейка тунца. Обслуживание на высшем уровне.', rating: 5, date: '2026-06-10' },
+        { name: 'Алексей', text: 'Наконец-то нашёл в городе ресторан, где умеют готовить по-настоящему. Прошутто э руккола, лавендер сауэр — всё с душой.', rating: 5, date: '2026-07-05' }
+    ];
+
+    dummyReviews.forEach(review => {
+        addReviewCard(review.name, review.text, review.rating, review.date);
+    });
+}
+
+// ===== СОЗДАНИЕ КАРТОЧКИ =====
+function addReviewCard(name, text, ratingValue, date) {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    
+    const stars = '★'.repeat(ratingValue) + '☆'.repeat(5 - ratingValue);
+    const formattedDate = new Date(date).toLocaleDateString('ru-RU');
+    
+    card.innerHTML = `
+        <h3>${escapeHtml(name)}</h3>
+        <p class="text">${escapeHtml(text)}</p>
+        <div class="card-footer">
+            <span class="rating">${stars}</span>
+            <span class="date">${formattedDate}</span>
+        </div>
+    `;
+    
+    track.appendChild(card);
+}
+
+// ===== ЗАЩИТА ОТ XSS =====
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// ===== ФУНКЦИИ СЛАЙДЕРА =====
 function getCardWidth() {
     if (track.children.length === 0) return 0;
     const firstCard = track.children[0];
-    // Получаем полную ширину карточки включая margin
     return firstCard.offsetWidth + 
            parseInt(getComputedStyle(firstCard).marginLeft) + 
            parseInt(getComputedStyle(firstCard).marginRight);
 }
 
-// Функция для получения ширины окна слайдера
 function getWindowWidth() {
     return sliderWindow.offsetWidth;
 }
 
 function updateSlider() {
     const cardWidth = getCardWidth();
-    const windowWidth = getWindowWidth();
-    
-    // Проверяем, чтобы индекс не уходил за пределы
     const maxIndex = Math.max(0, track.children.length - 1);
-    if (index > maxIndex) {
-        index = maxIndex;
+    
+    if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
     }
     
-    // Сдвигаем ровно на ширину карточки
-    track.style.transform = `translateX(-${index * cardWidth}px)`;
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
 }
 
-nextBtn.onclick = () => {
-    if (index < track.children.length - 1) {
-        index++;
-        updateSlider();
+function updateButtons() {
+    const maxIndex = track.children.length - 1;
+    if (prevBtn && nextBtn) {
+        prevBtn.disabled = currentIndex <= 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
     }
-};
+}
 
-prevBtn.onclick = () => {
-    if (index > 0) {
-        index--;
+// ===== ОБРАБОТЧИКИ СЛАЙДЕРА =====
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < track.children.length - 1) {
+            currentIndex++;
+            updateSlider();
+            updateButtons();
+        }
+    });
+}
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+            updateButtons();
+        }
+    });
+}
+
+// ===== СВАЙП ДЛЯ МОБИЛЬНЫХ =====
+if (sliderWindow) {
+    sliderWindow.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    sliderWindow.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && currentIndex < track.children.length - 1) {
+            // Свайп влево
+            currentIndex++;
+        } else if (diff < 0 && currentIndex > 0) {
+            // Свайп вправо
+            currentIndex--;
+        }
         updateSlider();
+        updateButtons();
     }
-};
-
-// Обновляем при изменении размера окна
-window.addEventListener('resize', () => {
-    updateSlider();
-});
-
-// Вызываем после загрузки страницы
-window.addEventListener('load', () => {
-    updateSlider();
-});
-
-// ===== МОДАЛКА =====
-const modal = document.getElementById('modal');
-document.getElementById('openModal').onclick = () => modal.style.display = 'flex';
-document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+}
 
 // ===== ЗВЁЗДЫ =====
-let rating = 5;
-const stars = document.querySelectorAll('.stars span');
+if (stars.length > 0) {
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            rating = parseInt(star.dataset.value);
+            stars.forEach(s => s.classList.remove('active'));
+            for (let i = 0; i < rating; i++) {
+                stars[i].classList.add('active');
+            }
+        });
+    });
 
-stars.forEach(star => {
-    star.onclick = () => {
-        rating = star.dataset.value;
-        stars.forEach(s => s.classList.remove('active'));
-        for (let i = 0; i < rating; i++) {
-            stars[i].classList.add('active');
-        }
-    };
-});
-
-// Устанавливаем начальное состояние звёзд (5 звезд по умолчанию)
-for (let i = 0; i < rating; i++) {
-    stars[i].classList.add('active');
+    // Устанавливаем начальное состояние звёзд
+    for (let i = 0; i < rating; i++) {
+        stars[i].classList.add('active');
+    }
 }
 
-// ===== ДОБАВЛЕНИЕ ОТЗЫВА =====
-document.getElementById('submitReview').onclick = () => {
-    const name = document.getElementById('nameInput').value;
-    const text = document.getElementById('textInput').value;
-    if (!name || !text) return;
+// ===== СЧЁТЧИК СИМВОЛОВ =====
+if (textInput) {
+    textInput.addEventListener('input', () => {
+        const length = textInput.value.length;
+        charCounter.textContent = `${length}/500`;
+        if (length >= 500) {
+            charCounter.style.color = '#ff0000';
+        } else {
+            charCounter.style.color = '#1f3627';
+        }
+    });
+}
 
-    const card = document.createElement('div');
-    card.className = 'review-card';
-    card.innerHTML = `
-        <div class="rating">${'★'.repeat(rating)}</div>
-        <h3>${name}</h3>
-        <p class="text">${text}</p>
-        <span class="date">${new Date().toLocaleDateString()}</span>
-    `;
+// ===== ТОГГЛ ФОРМЫ =====
+if (toggleFormBtn) {
+    toggleFormBtn.addEventListener('click', () => {
+        formContainer.classList.toggle('hidden');
+        if (formContainer.classList.contains('hidden')) {
+            toggleFormBtn.textContent = 'Оставить отзыв';
+        } else {
+            toggleFormBtn.textContent = 'Скрыть форму';
+        }
+    });
+}
 
-    track.prepend(card);
-    modal.style.display = 'none';
-    
-    // Очищаем форму
-    document.getElementById('nameInput').value = '';
-    document.getElementById('textInput').value = '';
-    
-    // Сбрасываем индекс и обновляем слайдер
-    index = 0;
+// ===== ОТПРАВКА ОТЗЫВА =====
+if (submitBtn) {
+    submitBtn.addEventListener('click', async () => {
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        
+        if (!name || !text) {
+            alert('Пожалуйста, заполните все поля');
+            return;
+        }
+        
+        if (name.length > 50) {
+            alert('Имя не должно превышать 50 символов');
+            return;
+        }
+        
+        if (text.length > 500) {
+            alert('Текст отзыва не должен превышать 500 символов');
+            return;
+        }
+        
+        try {
+            // Проверяем клиент перед отправкой
+            if (!supabaseClient || !supabaseClient.from) {
+                throw new Error('Supabase client not initialized');
+            }
+
+            console.log('Sending review:', { name, rating, text });
+
+            const { data, error } = await supabaseClient
+                .from('reviews')
+                .insert([
+                    { 
+                        name: name, 
+                        rating: rating, 
+                        text: text 
+                    }
+                ])
+                .select();
+
+            if (error) {
+                console.error('Supabase insert error:', error);
+                throw error;
+            }
+
+            console.log('Review saved:', data);
+
+            // Добавляем отзыв в конец списка
+            if (data && data[0]) {
+                addReviewCard(data[0].name, data[0].text, data[0].rating, data[0].created_at);
+            }
+
+            // Очищаем форму
+            nameInput.value = '';
+            textInput.value = '';
+            charCounter.textContent = '0/500';
+            
+            // Показываем сообщение
+            thankYouMessage.classList.remove('hidden');
+            setTimeout(() => {
+                thankYouMessage.classList.add('hidden');
+            }, 3000);
+
+            // Переключаемся на последний отзыв
+            currentIndex = track.children.length - 1;
+            updateSlider();
+            updateButtons();
+
+        } catch (error) {
+            console.error('Ошибка сохранения отзыва:', error);
+            alert(`Ошибка: ${error.message || 'Произошла ошибка при сохранении отзыва'}`);
+        }
+    });
+}
+
+// ===== RESIZE =====
+window.addEventListener('resize', () => {
     updateSlider();
-};
+    updateButtons();
+});
+
+// ===== ЗАГРУЗКА =====
+window.addEventListener('load', () => {
+    loadReviews();
+});
