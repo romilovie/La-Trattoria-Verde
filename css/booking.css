@@ -722,10 +722,6 @@ input, textarea {
         grid-template-columns: repeat(2, minmax(65px, 1fr));
     }
     
-    .table-7 {
-        grid-column: span 2;
-    }
-    
     .terrace-hall-grid {
         grid-template-columns: repeat(2, minmax(65px, 1fr));
     }
@@ -782,6 +778,7 @@ input, textarea {
 .error {
     color: #ff6b6b;
 }
+
 
 
 
