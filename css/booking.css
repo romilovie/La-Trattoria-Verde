@@ -334,7 +334,7 @@ input, textarea {
 
 @media (max-width: 360px) {
     .hall {
-        grid-template-columns: repeat(3, 56px);
+        grid-template-columns: repeat(3, 53px);
         grid-template-rows: repeat(3, 51px);
     }
     
@@ -345,7 +345,7 @@ input, textarea {
 
 @media (max-width: 320px) {
     .hall {
-        grid-template-columns: repeat(3, 50px);
+        grid-template-columns: repeat(3, 47px);
         grid-template-rows: repeat(3, 46px);
         gap: 4px;
     }
@@ -757,6 +757,7 @@ input, textarea {
 .error {
     color: #ff6b6b;
 }
+
 
 
 
