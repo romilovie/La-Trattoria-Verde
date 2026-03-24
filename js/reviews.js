@@ -1,11 +1,15 @@
-// ===== ИНИЦИАЛИЗАЦИЯ SUPABASE =====
+// =====================================================
+// ИНИЦИАЛИЗАЦИЯ КЛИЕНТА SUPABASE
+// =====================================================
 const SUPABASE_URL = 'https://yygbwpfckmwwuiudpiif.supabase.co'; 
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4'; 
 
-// Создаем клиент Supabase
+// Создание экземпляра клиента Supabase
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// функция проверки подключения
+// -----------------------------------------------------
+// ФУНКЦИЯ ПРОВЕРКИ ПОДКЛЮЧЕНИЯ К БАЗЕ ДАННЫХ
+// -----------------------------------------------------
 async function testConnection() {
     try {
         console.log('Testing Supabase connection...');
@@ -25,10 +29,12 @@ async function testConnection() {
     }
 }
 
-// Вызовите при загрузке
+// Вызов функции проверки при инициализации страницы
 testConnection();
 
-// ===== ЭЛЕМЕНТЫ =====
+// =====================================================
+// ПОЛУЧЕНИЕ ССЫЛОК НА DOM-ЭЛЕМЕНТЫ
+// =====================================================
 const track = document.getElementById('reviewsList');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -42,18 +48,24 @@ const submitBtn = document.getElementById('submitReview');
 const thankYouMessage = document.getElementById('thankYouMessage');
 const stars = document.querySelectorAll('.stars span');
 
+// -----------------------------------------------------
+// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ СОСТОЯНИЯ
+// -----------------------------------------------------
 let currentIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
 let rating = 5;
 
-// ===== ЗАГРУЗКА ОТЗЫВОВ =====
+// =====================================================
+// ЗАГРУЗКА И ОТОБРАЖЕНИЕ ОТЗЫВОВ
+// =====================================================
 async function loadReviews() {
     try {
-        // Проверяем, что клиент инициализирован правильно
+        // Проверка корректности инициализации клиента Supabase
         if (!supabaseClient || !supabaseClient.from) {
             console.error('Supabase client not initialized properly');
-            // Если клиент не работает, показываем только фиктивные отзывы
+            
+            // Отображение только фиктивных данных при ошибке
             track.innerHTML = '';
             addDummyReviews();
             updateSlider();
@@ -68,13 +80,13 @@ async function loadReviews() {
 
         if (error) throw error;
 
-        // Очищаем трек
+        // Очистка контейнера перед повторным заполнением
         track.innerHTML = '';
 
-        // Добавляем фиктивные отзывы (они всегда будут первыми)
+        // Добавление фиктивных отзывов (отображаются всегда первыми)
         addDummyReviews();
 
-        // Добавляем отзывы из БД
+        // Добавление отзывов, полученных из базы данных
         if (data && data.length > 0) {
             data.forEach(review => {
                 addReviewCard(review.name, review.text, review.rating, review.created_at);
@@ -85,7 +97,8 @@ async function loadReviews() {
         updateButtons();
     } catch (error) {
         console.error('Ошибка загрузки отзывов:', error);
-        // Если ошибка, показываем хотя бы фиктивные
+        
+        // Резервное отображение фиктивных отзывов
         track.innerHTML = '';
         addDummyReviews();
         updateSlider();
@@ -93,7 +106,9 @@ async function loadReviews() {
     }
 }
 
-// ===== ФИКТИВНЫЕ ОТЗЫВЫ =====
+// =====================================================
+// ФИКТИВНЫЕ (ТЕСТОВЫЕ) ОТЗЫВЫ
+// =====================================================
 function addDummyReviews() {
     const dummyReviews = [
         { name: 'Марк', text: 'Обожаю это место! Атмосфера — чистая Италия. Карбонара здесь просто божественная, а тирамису — лучший в городе. Уже рекомендовал всем друзьям!', rating: 5, date: '2026-05-21' },
@@ -106,7 +121,9 @@ function addDummyReviews() {
     });
 }
 
-// ===== СОЗДАНИЕ КАРТОЧКИ =====
+// =====================================================
+// ФОРМИРОВАНИЕ HTML-КАРТОЧКИ ОТЗЫВА
+// =====================================================
 function addReviewCard(name, text, ratingValue, date) {
     const card = document.createElement('div');
     card.className = 'review-card';
@@ -126,7 +143,9 @@ function addReviewCard(name, text, ratingValue, date) {
     track.appendChild(card);
 }
 
-// ===== ЗАЩИТА ОТ XSS =====
+// =====================================================
+// ЗАЩИТА ОТ XSS-АТАК (ЭКРАНИРОВАНИЕ HTML)
+// =====================================================
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
@@ -136,7 +155,9 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-// ===== ФУНКЦИИ СЛАЙДЕРА =====
+// =====================================================
+// ЛОГИКА РАБОТЫ СЛАЙДЕРА
+// =====================================================
 function getCardWidth() {
     if (track.children.length === 0) return 0;
     const firstCard = track.children[0];
@@ -168,7 +189,9 @@ function updateButtons() {
     }
 }
 
-// ===== ОБРАБОТЧИКИ СЛАЙДЕРА =====
+// =====================================================
+// ОБРАБОТЧИКИ КНОПОК СЛАЙДЕРА
+// =====================================================
 if (nextBtn) {
     nextBtn.addEventListener('click', () => {
         if (currentIndex < track.children.length - 1) {
@@ -189,7 +212,9 @@ if (prevBtn) {
     });
 }
 
-// ===== СВАЙП ДЛЯ МОБИЛЬНЫХ =====
+// =====================================================
+// ОБРАБОТКА СЕНСОРНЫХ ЖЕСТОВ (СВАЙП)
+// =====================================================
 if (sliderWindow) {
     sliderWindow.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
@@ -207,10 +232,8 @@ function handleSwipe() {
     
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0 && currentIndex < track.children.length - 1) {
-            // Свайп влево
             currentIndex++;
         } else if (diff < 0 && currentIndex > 0) {
-            // Свайп вправо
             currentIndex--;
         }
         updateSlider();
@@ -218,7 +241,9 @@ function handleSwipe() {
     }
 }
 
-// ===== ЗВЁЗДЫ =====
+// =====================================================
+// ВЫБОР РЕЙТИНГА (ЗВЁЗДЫ)
+// =====================================================
 if (stars.length > 0) {
     stars.forEach(star => {
         star.addEventListener('click', () => {
@@ -230,13 +255,15 @@ if (stars.length > 0) {
         });
     });
 
-    // Устанавливаем начальное состояние звёзд
+    // Установка начального значения рейтинга
     for (let i = 0; i < rating; i++) {
         stars[i].classList.add('active');
     }
 }
 
-// ===== СЧЁТЧИК СИМВОЛОВ =====
+// =====================================================
+// СЧЁТЧИК СИМВОЛОВ В ПОЛЕ ВВОДА
+// =====================================================
 if (textInput) {
     textInput.addEventListener('input', () => {
         const length = textInput.value.length;
@@ -249,7 +276,9 @@ if (textInput) {
     });
 }
 
-// ===== ТОГГЛ ФОРМЫ =====
+// =====================================================
+// УПРАВЛЕНИЕ ОТОБРАЖЕНИЕМ ФОРМЫ
+// =====================================================
 if (toggleFormBtn) {
     toggleFormBtn.addEventListener('click', () => {
         formContainer.classList.toggle('hidden');
@@ -261,7 +290,9 @@ if (toggleFormBtn) {
     });
 }
 
-// ===== ОТПРАВКА ОТЗЫВА =====
+// =====================================================
+// ОТПРАВКА ОТЗЫВА В БАЗУ ДАННЫХ
+// =====================================================
 if (submitBtn) {
     submitBtn.addEventListener('click', async () => {
         const name = nameInput.value.trim();
@@ -283,7 +314,7 @@ if (submitBtn) {
         }
         
         try {
-            // Проверяем клиент перед отправкой
+            // Проверка корректности клиента перед отправкой данных
             if (!supabaseClient || !supabaseClient.from) {
                 throw new Error('Supabase client not initialized');
             }
@@ -308,23 +339,23 @@ if (submitBtn) {
 
             console.log('Review saved:', data);
 
-            // Добавляем отзыв в конец списка
+            // Добавление нового отзыва в интерфейс
             if (data && data[0]) {
                 addReviewCard(data[0].name, data[0].text, data[0].rating, data[0].created_at);
             }
 
-            // Очищаем форму
+            // Очистка формы ввода
             nameInput.value = '';
             textInput.value = '';
             charCounter.textContent = '0/500';
             
-            // Показываем сообщение
+            // Отображение уведомления пользователю
             thankYouMessage.classList.remove('hidden');
             setTimeout(() => {
                 thankYouMessage.classList.add('hidden');
             }, 3000);
 
-            // Переключаемся на последний отзыв
+            // Переключение на последний элемент слайдера
             currentIndex = track.children.length - 1;
             updateSlider();
             updateButtons();
@@ -336,13 +367,18 @@ if (submitBtn) {
     });
 }
 
-// ===== RESIZE =====
+// =====================================================
+// ОБРАБОТКА ИЗМЕНЕНИЯ РАЗМЕРА ОКНА
+// =====================================================
 window.addEventListener('resize', () => {
     updateSlider();
     updateButtons();
 });
 
-// ===== ЗАГРУЗКА =====
+// =====================================================
+// ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+// =====================================================
 window.addEventListener('load', () => {
     loadReviews();
 });
+
