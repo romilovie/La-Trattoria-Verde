@@ -1,17 +1,27 @@
-// Конфигурация Supabase
+// =====================================================
+// КОНФИГУРАЦИЯ И ИНИЦИАЛИЗАЦИЯ SUPABASE
+// =====================================================
 const SUPABASE_URL = 'https://yygbwpfckmwwuiudpiif.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4'; 
 
-// Создаем клиент Supabase (используем другое имя переменной)
+// Создание клиента Supabase (с проверкой наличия библиотеки)
 const supabaseClient = window.supabase?.createClient 
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
+// Проверка успешности инициализации клиента
 if (!supabaseClient) {
     console.warn('Supabase client not initialized. Make sure to include the Supabase library.');
 }
 
+// =====================================================
+// ИНИЦИАЛИЗАЦИЯ ЛОГИКИ ПОСЛЕ ЗАГРУЗКИ DOM-ДЕРЕВА
+// =====================================================
 document.addEventListener('DOMContentLoaded', function() {
+
+    // -------------------------------------------------
+    // ПОЛУЧЕНИЕ ССЫЛОК НА ЭЛЕМЕНТЫ ФОРМЫ
+    // -------------------------------------------------
     const form = document.getElementById('contactForm');
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
@@ -21,22 +31,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
 
-    // Маска для телефона
+    // =================================================
+    // ФУНКЦИИ ОБРАБОТКИ И ВАЛИДАЦИИ ДАННЫХ
+    // =================================================
+
+    // -------------------------------------------------
+    // ФОРМАТИРОВАНИЕ (МАСКА) НОМЕРА ТЕЛЕФОНА
+    // -------------------------------------------------
     function phoneMask(value) {
         if (!value) return value;
         
-        // Удаляем все нецифровые символы
+        // Удаление всех нецифровых символов
         let phone = value.replace(/\D/g, '');
         
-        // Если номер начинается с 7 или 8, убираем первую цифру для форматирования
+        // Удаление ведущей цифры (7 или 8) для форматирования
         if (phone.startsWith('7') || phone.startsWith('8')) {
             phone = phone.substring(1);
         }
         
-        // Ограничиваем длину
+        // Ограничение длины номера
         phone = phone.substring(0, 10);
         
-        // Применяем маску +7 (999) 999-99-99
+        // Формирование строки в формате +7 (XXX) XXX-XX-XX
         let result = '+7';
         
         if (phone.length > 0) {
@@ -62,26 +78,31 @@ document.addEventListener('DOMContentLoaded', function() {
         return result;
     }
 
-    // Валидация email
+    // -------------------------------------------------
+    // ПРОВЕРКА КОРРЕКТНОСТИ EMAIL-АДРЕСА
+    // -------------------------------------------------
     function isValidEmail(email) {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
     }
 
-    // Валидация телефона (полный номер)
+    // -------------------------------------------------
+    // ПРОВЕРКА КОРРЕКТНОСТИ НОМЕРА ТЕЛЕФОНА
+    // -------------------------------------------------
     function isValidPhone(phone) {
         const phoneDigits = phone.replace(/\D/g, '');
-        // Должно быть 11 цифр (включая 7 в начале)
         return phoneDigits.length === 11 && (phoneDigits.startsWith('7') || phoneDigits.startsWith('8'));
     }
 
-    // Обновление счетчика символов
+    // -------------------------------------------------
+    // ОБНОВЛЕНИЕ СЧЁТЧИКА СИМВОЛОВ
+    // -------------------------------------------------
     function updateCharCounter() {
         const currentLength = messageInput.value.length;
         const maxLength = messageInput.maxLength;
         charCounter.textContent = `${currentLength}/${maxLength}`;
         
-        // Меняем классы в зависимости от заполненности
+        // Изменение визуального состояния в зависимости от длины текста
         charCounter.classList.remove('warning', 'danger');
         
         if (currentLength >= maxLength * 0.9) {
@@ -91,7 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Очистка полей от классов ошибок
+    // -------------------------------------------------
+    // СБРОС ОШИБОК ВАЛИДАЦИИ
+    // -------------------------------------------------
     function clearErrors() {
         [nameInput, phoneInput, emailInput, messageInput].forEach(input => {
             input.classList.remove('error');
@@ -99,12 +122,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Показать сообщение
+    // -------------------------------------------------
+    // ОТОБРАЖЕНИЕ СООБЩЕНИЙ ПОЛЬЗОВАТЕЛЮ
+    // -------------------------------------------------
     function showMessage(text, type = 'info') {
         formStatus.textContent = text;
         formStatus.className = `form-status ${type}`;
         
-        // Автоматически скрываем успешное сообщение через 5 секунд
+        // Автоматическое скрытие сообщения об успехе
         if (type === 'success') {
             setTimeout(() => {
                 formStatus.style.opacity = '0';
@@ -117,23 +142,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Обработка ввода телефона
+    // =================================================
+    // ОБРАБОТЧИКИ СОБЫТИЙ ВВОДА ДАННЫХ
+    // =================================================
+
+    // Ввод номера телефона с применением маски
     phoneInput.addEventListener('input', function(e) {
         let cursorPos = e.target.selectionStart;
         let oldLength = e.target.value.length;
         
         e.target.value = phoneMask(e.target.value);
         
-        // Корректируем позицию курсора
+        // Корректировка позиции курсора после форматирования
         let newLength = e.target.value.length;
         cursorPos += newLength - oldLength;
         e.target.setSelectionRange(cursorPos, cursorPos);
         
-        // Убираем ошибку при вводе
         e.target.classList.remove('error');
     });
 
-    // Валидация при потере фокуса
+    // Проверка телефона при потере фокуса
     phoneInput.addEventListener('blur', function() {
         if (this.value && !isValidPhone(this.value)) {
             this.classList.add('error');
@@ -142,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Обработка ввода email
-    emailInput.addEventListener('input', function(e) {
+    // Обработка email
+    emailInput.addEventListener('input', function() {
         this.classList.remove('error');
     });
 
@@ -168,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Обновление счетчика символов
+    // Обработка поля сообщения
     messageInput.addEventListener('input', function() {
         updateCharCounter();
         this.classList.remove('error');
@@ -182,15 +210,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Инициализация счетчика
+    // Инициализация счётчика символов
     updateCharCounter();
 
-    // Валидация формы перед отправкой
+    // =================================================
+    // ВАЛИДАЦИЯ ФОРМЫ ПЕРЕД ОТПРАВКОЙ
+    // =================================================
     function validateForm() {
         let isValid = true;
         clearErrors();
 
-        // Проверка имени
         if (!nameInput.value.trim()) {
             nameInput.classList.add('error');
             showMessage('Введите имя', 'error');
@@ -201,19 +230,16 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('Имя должно содержать минимум 2 символа', 'error');
             isValid = false;
         }
-        // Проверка телефона
         else if (!isValidPhone(phoneInput.value)) {
             phoneInput.classList.add('error');
             showMessage('Введите корректный номер телефона (например: +7 (999) 999-99-99)', 'error');
             isValid = false;
         }
-        // Проверка email
         else if (!isValidEmail(emailInput.value)) {
             emailInput.classList.add('error');
             showMessage('Введите корректный email адрес (например: name@domain.com)', 'error');
             isValid = false;
         }
-        // Проверка сообщения
         else if (!messageInput.value.trim()) {
             messageInput.classList.add('error');
             showMessage('Введите сообщение', 'error');
@@ -228,7 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
-    // Сохранение в Supabase
+    // =================================================
+    // СОХРАНЕНИЕ ДАННЫХ В БАЗУ SUPABASE
+    // =================================================
     async function saveToDatabase(formData) {
         if (!supabaseClient) {
             throw new Error('Supabase client not initialized');
@@ -259,7 +287,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
-    // Получение IP адреса (через бесплатный сервис)
+    // -------------------------------------------------
+    // ПОЛУЧЕНИЕ IP-АДРЕСА ПОЛЬЗОВАТЕЛЯ
+    // -------------------------------------------------
     async function getIpAddress() {
         try {
             const response = await fetch('https://api.ipify.org?format=json');
@@ -271,7 +301,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Обработка отправки формы
+    // =================================================
+    // ОБРАБОТКА ОТПРАВКИ ФОРМЫ
+    // =================================================
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -279,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Блокируем кнопку
+        // Блокировка кнопки отправки
         const originalText = submitBtn.textContent;
         submitBtn.textContent = '';
         submitBtn.classList.add('sending');
@@ -288,10 +320,10 @@ document.addEventListener('DOMContentLoaded', function() {
         showMessage('Отправка данных...', 'info');
 
         try {
-            // Получаем IP адрес
+            // Получение IP-адреса пользователя
             const ipAddress = await getIpAddress();
 
-            // Подготавливаем данные
+            // Формирование объекта данных формы
             const formData = {
                 name: nameInput.value.trim(),
                 phone: phoneInput.value,
@@ -303,18 +335,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('Form data prepared:', formData);
 
-            // Сохраняем в Supabase
+            // Сохранение данных в базе данных
             if (supabaseClient) {
                 await saveToDatabase(formData);
                 
-                // Показываем сообщение об успехе
+                // Уведомление пользователя об успешной отправке
                 showMessage('Спасибо за вопрос! Мы ответим вам в ближайшее время.', 'success');
                 
-                // Очищаем форму
+                // Очистка формы
                 form.reset();
                 updateCharCounter();
-                
-                // Очищаем поля от подсветки ошибок
                 clearErrors();
                 
             } else {
@@ -324,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Detailed error:', error);
             
-            // Более информативное сообщение об ошибке
+            // Формирование сообщения об ошибке
             let errorMessage = 'Произошла ошибка при отправке. ';
             
             if (error.message.includes('relation') || error.message.includes('does not exist')) {
@@ -339,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             showMessage(errorMessage, 'error');
         } finally {
-            // Разблокируем кнопку
+            // Разблокировка кнопки отправки
             submitBtn.textContent = originalText;
             submitBtn.classList.remove('sending');
             submitBtn.disabled = false;
