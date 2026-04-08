@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // URL и публичный ключ проекта Supabase
     const SUPABASE_URL = 'https://yygbwpfckmwwuiudpiif.supabase.co';
-    const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5Z2J3cGZja213d3VpdWRwaWlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzODA4MzAsImV4cCI6MjA4Nzk1NjgzMH0.fodKHJqCzT6VJryALAIGojmzZJdGoOTnNaNjqEusQZ4';
     
     // Создание клиента для взаимодействия с базой данных
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
