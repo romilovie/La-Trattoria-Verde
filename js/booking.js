@@ -25,9 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (error) {
                 console.error('❌ Ошибка подключения:', error.message);
-                console.log('Проверьте:');
-                console.log('1. Настроены ли RLS политики?');
-                console.log('2. Существует ли таблица bookings?');
                 return false;
             }
             
@@ -41,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ==================== ПОЛУЧЕНИЕ DOM-ЭЛЕМЕНТОВ ====================
     
-    const tables = document.querySelectorAll('.table');
+    let tables = []; // Будет заполнено позже
     const tablesCount = document.getElementById('tablesCount');
     const seatsCount = document.getElementById('seatsCount');
     const bookingInfo = document.getElementById('bookingInfo');
@@ -63,19 +60,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Установка минимальной даты (сегодня)
     const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-    dateInput.value = today;
-    selectedDate = today;
+    if (dateInput) {
+        dateInput.min = today;
+        dateInput.value = today;
+        selectedDate = today;
+    }
     
     // Обработчик изменения даты
-    dateInput.addEventListener('change', function(e) {
-        selectedDate = e.target.value;
-        selectedTime = null;
-        selectedTables = [];
-        updateSelectionSummary();
-        hideBookingForm();
-        loadAvailableTimeSlots(selectedDate);
-    });
+    if (dateInput) {
+        dateInput.addEventListener('change', function(e) {
+            selectedDate = e.target.value;
+            selectedTime = null;
+            selectedTables = [];
+            updateSelectionSummary();
+            hideBookingForm();
+            loadAvailableTimeSlots(selectedDate);
+        });
+    }
     
     // ==================== ВАЛИДАЦИЯ И МАСКИ ====================
     
@@ -86,16 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ==================== ЗАГРУЗКА ДОСТУПНОГО ВРЕМЕНИ ====================
     
-    /**
-     * Загружает доступные временные слоты для выбранной даты
-     * @param {string} date - дата бронирования
-     */
     async function loadAvailableTimeSlots(date) {
         const allTimeSlots = ['12:00','13:00','14:00','15:00','16:00','17:00',
                              '18:00','19:00','20:00','21:00','22:00'];
         
+        if (!timeSlots) return;
+        
         try {
-            // Получение занятых временных слотов из базы данных
             const { data: bookings } = await supabaseClient
                 .from('bookings')
                 .select('booking_time')
@@ -105,13 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             timeSlots.innerHTML = '';
 
-            // Генерация кнопок времени
             allTimeSlots.forEach(time => {
                 const btn = document.createElement('button');
                 btn.textContent = time;
                 btn.className = 'time-slot-btn';
 
-                // Блокировка занятых слотов
                 if (busyTimeSlots.includes(time)) {
                     btn.disabled = true;
                     btn.classList.add('disabled');
@@ -129,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==================== ВЫБОР ВРЕМЕНИ ====================
     
     function selectTime(button, time) {
-        // Убираем выделение с предыдущей кнопки
         document.querySelectorAll('.time-slot-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
@@ -137,12 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
         button.classList.add('selected');
         selectedTime = time;
         
-        // Сбрасываем выбранные столы при смене времени
         selectedTables = [];
         updateSelectionSummary();
         hideBookingForm();
         
-        // Загрузка занятых столов на выбранное время
         loadBusyTables(selectedDate, selectedTime);
     }
     
@@ -156,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 .eq('booking_date', date)
                 .eq('booking_time', time);
 
-            // Формирование списка занятых столов
             busyTables = bookings ? bookings.flatMap(b => b.table_ids) : [];
             
             updateTablesStatus();
@@ -168,13 +160,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==================== ОБНОВЛЕНИЕ СТАТУСА СТОЛОВ ====================
     
     function updateTablesStatus() {
+        // Получаем свежие ссылки на столы
+        tables = document.querySelectorAll('.table');
+        
         tables.forEach(table => {
             const tableId = parseInt(table.dataset.id);
             
-            // Сначала сбрасываем все классы
+            // Сбрасываем классы
             table.classList.remove('busy', 'selected');
             
-            // Проверяем, занят ли стол
+            // Добавляем класс в зависимости от статуса
             if (busyTables.includes(tableId)) {
                 table.classList.add('busy');
                 table.classList.remove('free');
@@ -186,55 +181,24 @@ document.addEventListener('DOMContentLoaded', function() {
             if (selectedTables.includes(table)) {
                 table.classList.add('selected');
             }
-            
-            // Обновляем обработчик клика
-            updateTableClickHandler(table);
         });
     }
     
-    function updateTableClickHandler(table) {
-        // Удаляем старый обработчик
-        const newTable = table.cloneNode(true);
-        table.parentNode.replaceChild(newTable, table);
-        
-        // Добавляем новый обработчик
-        newTable.addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            const tableId = parseInt(newTable.dataset.id);
-            
-            // Проверяем, свободен ли стол
-            if (busyTables.includes(tableId)) {
-                alert('Этот стол уже забронирован на выбранное время');
-                return;
-            }
-            
-            toggleTableSelection(newTable);
-        });
-        
-        // Обновляем ссылку в массиве tables
-        const index = Array.from(tables).indexOf(table);
-        if (index !== -1) {
-            tables[index] = newTable;
-        }
-    }
+    // ==================== ВЫБОР СТОЛА ====================
     
     function toggleTableSelection(tableElement) {
         const index = selectedTables.indexOf(tableElement);
         
         if (index === -1) {
-            // Добавляем стол
             selectedTables.push(tableElement);
             tableElement.classList.add('selected');
         } else {
-            // Убираем стол
             selectedTables.splice(index, 1);
             tableElement.classList.remove('selected');
         }
         
         updateSelectionSummary();
         
-        // Показываем/скрываем форму в зависимости от выбранных столов
         if (selectedTables.length > 0 && selectedTime) {
             showBookingForm();
         } else {
@@ -242,14 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ==================== ОБНОВЛЕНИЕ ИНФОРМАЦИИ О ВЫБОРЕ ====================
+    // ==================== ОБНОВЛЕНИЕ ИНФОРМАЦИИ ====================
     
     function updateSelectionSummary() {
-        // Подсчет количества столов
+        if (!tablesCount || !seatsCount) return;
+        
         const count = selectedTables.length;
         tablesCount.textContent = count;
         
-        // Подсчет общего количества мест
         let totalSeats = 0;
         selectedTables.forEach(table => {
             const seats = parseInt(table.dataset.seats);
@@ -257,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         seatsCount.textContent = totalSeats;
         
-        // Обновление информации в форме
         if (bookingInfo) {
             if (selectedTables.length > 0 && selectedTime && selectedDate) {
                 bookingInfo.innerHTML = `
@@ -281,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day}.${month}.${year}`;
     }
     
-    // ==================== ПОКАЗ/СКРЫТИЕ ФОРМЫ ====================
+    // ==================== УПРАВЛЕНИЕ ФОРМОЙ ====================
     
     function showBookingForm() {
         if (bookingFormContainer) {
@@ -313,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
         bookingForm.onsubmit = async (e) => {
             e.preventDefault();
             
-            // Проверка наличия необходимых данных
             if (!selectedDate || !selectedTime || selectedTables.length === 0) {
                 alert('Пожалуйста, выберите дату, время и столики');
                 return;
@@ -322,30 +284,29 @@ document.addEventListener('DOMContentLoaded', function() {
             const nameInput = document.getElementById('name');
             const phoneInputField = document.getElementById('phone');
             
-            if (!nameInput.value || !phoneInputField.value) {
+            if (!nameInput || !phoneInputField || !nameInput.value || !phoneInputField.value) {
                 alert('Пожалуйста, заполните имя и телефон');
                 return;
             }
             
-            // Формирование объекта бронирования
             const bookingData = {
                 booking_date: selectedDate,
                 booking_time: selectedTime,
                 table_ids: selectedTables.map(t => parseInt(t.dataset.id)),
                 customer_name: nameInput.value,
                 customer_phone: phoneInputField.value,
-                customer_email: document.getElementById('email').value || null,
-                comments: document.getElementById('comments').value || null,
+                customer_email: document.getElementById('email')?.value || null,
+                comments: document.getElementById('comments')?.value || null,
                 created_at: new Date().toISOString()
             };
             
-            // Блокируем кнопку отправки
             const submitButton = document.getElementById('submitBooking');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Отправка...';
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Отправка...';
+            }
             
             try {
-                // Отправка данных в Supabase
                 const { error } = await supabaseClient
                     .from('bookings')
                     .insert([bookingData]);
@@ -354,17 +315,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 alert('Бронирование успешно создано!');
                 
-                // Сброс формы
-                bookingForm.reset();
+                if (bookingForm) bookingForm.reset();
                 selectedTables = [];
                 selectedTime = null;
                 updateSelectionSummary();
                 hideBookingForm();
-                
-                // Перезагрузка доступных слотов
                 loadAvailableTimeSlots(selectedDate);
                 
-                // Убираем выделение с кнопки времени
                 document.querySelectorAll('.time-slot-btn').forEach(btn => {
                     btn.classList.remove('selected');
                 });
@@ -373,8 +330,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Ошибка бронирования:', error);
                 alert('Ошибка при бронировании: ' + error.message);
             } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Забронировать';
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Забронировать';
+                }
             }
         };
     }
@@ -392,23 +351,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (error) {
                 console.error('Ошибка очистки старых броней:', error);
-            } else {
-                console.log('Старые брони успешно очищены');
             }
         } catch (error) {
             console.error('Ошибка при очистке:', error);
         }
     }
     
-    // ==================== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ====================
+    // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     
-    // Инициализация обработчиков для столов
     function initTableHandlers() {
-        const allTables = document.querySelectorAll('.table');
-        allTables.forEach(table => {
-            table.addEventListener('click', (e) => {
+        tables = document.querySelectorAll('.table');
+        
+        tables.forEach(table => {
+            // Удаляем старые обработчики, если есть
+            const newTable = table.cloneNode(true);
+            table.parentNode?.replaceChild(newTable, table);
+            
+            newTable.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const tableId = parseInt(table.dataset.id);
+                const tableId = parseInt(newTable.dataset.id);
                 
                 if (!selectedTime) {
                     alert('Сначала выберите дату и время');
@@ -420,12 +381,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 
-                toggleTableSelection(table);
+                toggleTableSelection(newTable);
             });
         });
+        
+        // Обновляем глобальную переменную tables
+        tables = document.querySelectorAll('.table');
     }
     
-    // Запуск инициализации
+    // Запуск
     testSupabaseConnection().then(success => {
         if (success) {
             loadAvailableTimeSlots(today);
