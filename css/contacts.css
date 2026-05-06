@@ -1,27 +1,39 @@
+/**
+ * Файл стилей для страницы контактов
+ */
+
+/* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+
+/* Сброс отступов и параметров box-sizing для всех элементов */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Основные стили для тела документа */
 body {
     background: radial-gradient(circle at top, #0e2a2c, #020c0d);
     color: #f2e9e4;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== HEADER ===== */
+/* === ШАПКА САЙТА === */
+
+/* Стили шапки (переопределение основного файла) */
 .header {
     background-color: #0b1f1e;
     padding: 18px 0;
 }
 
+/* Внутренний контейнер шапки (flex для выравнивания) */
 .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+/* Стили логотипа */
 .logo {
     font-size: 18px;
     letter-spacing: 2px;
@@ -29,23 +41,27 @@ body {
     text-transform: uppercase;
 }
 
+/* Список навигации */
 .nav__list {
     display: flex;
     gap: 24px;
     font-size: 14px;
 }
 
+/* Блок с действиями в шапке */
 .header__actions {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
+/* Номер телефона в шапке */
 .header__phone {
     font-size: 14px;
     opacity: 0.9;
 }
 
+/* Кнопка бургер-меню (скрыта на десктопе) */
 .burger {
     display: none;
     background: none;
@@ -54,7 +70,9 @@ body {
     color: #fff;
 }
 
-/* PAGE */
+/* === ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ КОНТАКТОВ === */
+
+/* Сетка страницы контактов: две колонки */
 .contacts-page {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -62,30 +80,37 @@ body {
     padding: 80px 60px;
 }
 
-/* INFO */
+/* === БЛОК С КОНТАКТНОЙ ИНФОРМАЦИЕЙ === */
+
+/* Заголовок контактной информации */
 .contacts-info h1 {
     font-family: 'Playfair Display', serif;
     font-size: 52px;
     margin-bottom: 40px;
 }
 
+/* Текст контактной информации */
 .contacts-info p {
     margin-bottom: 22px;
     line-height: 1.7;
     color: #d6cfc9;
 }
 
+/* Выделенные элементы (номера телефонов, email и т.д.) */
 .contacts-info strong {
     color: #c89b7b;
     font-weight: 500;
 }
 
-/* MAP */
+/* === БЛОК С КАРТОЙ === */
+
+/* Обёртка для карты */
 .map-section {
     position: relative;
     height: 360px;
 }
 
+/* Ссылка-обёртка карты (для перехода в карты) */
 .map-link {
     display: block;
     width: 100%;
@@ -93,6 +118,7 @@ body {
     position: relative;
 }
 
+/* Фрейм карты (встраиваемая карта) */
 .map-section iframe {
     width: 100%;
     height: 100%;
@@ -100,6 +126,7 @@ body {
     filter: grayscale(0.2);
 }
 
+/* Затемняющая overlay-подложка, появляющаяся при наведении */
 .map-overlay {
     position: absolute;
     inset: 0;
@@ -111,6 +138,7 @@ body {
     transition: 0.3s ease;
 }
 
+/* Текст внутри overlay */
 .map-overlay span {
     background: #8b5e52;
     padding: 12px 26px;
@@ -118,22 +146,27 @@ body {
     font-size: 14px;
 }
 
+/* Появление overlay при наведении на карту */
 .map-link:hover .map-overlay {
     opacity: 1;
 }
 
-/* FORM */
+/* === ФОРМА ОБРАТНОЙ СВЯЗИ === */
+
+/* Контейнер формы обратной связи */
 .feedback {
     grid-column: 1 / 2;
     margin-top: 40px;
 }
 
+/* Заголовок формы */
 .feedback h2 {
     font-family: 'Playfair Display', serif;
     font-size: 36px;
     margin-bottom: 25px;
 }
 
+/* Стили формы */
 form {
     display: flex;
     flex-direction: column;
@@ -141,6 +174,7 @@ form {
     max-width: 420px;
 }
 
+/* Поля ввода и текстовая область */
 input, textarea {
     background: transparent;
     border: 1px solid #8b5e52;
@@ -149,11 +183,13 @@ input, textarea {
     font-size: 14px;
 }
 
+/* Плейсхолдеры полей ввода */
 input::placeholder,
 textarea::placeholder {
     color: #bfb6af;
 }
 
+/* Кнопка отправки формы */
 button[type="submit"] {
     background: #8b5e52;
     color: #fff;
@@ -163,16 +199,20 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+/* Эффект наведения для кнопки отправки */
 button[type="submit"]:hover {
     background: #a87463;
 }
 
-/* ===== FOOTER ===== */
+/* === ПОДВАЛ САЙТА === */
+
+/* Стили подвала */
 .footer {
     background-color: #081817;
     padding: 60px 0 20px;
 }
 
+/* Сетка колонок подвала */
 .footer__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -180,11 +220,13 @@ button[type="submit"]:hover {
     margin-bottom: 40px;
 }
 
+/* Заголовок колонки подвала */
 .footer__column h3 {
     font-size: 16px;
     margin-bottom: 15px;
 }
 
+/* Текст и пункты списка в подвале */
 .footer__column p,
 .footer__column li {
     font-size: 14px;
@@ -192,12 +234,14 @@ button[type="submit"]:hover {
     margin-bottom: 8px;
 }
 
+/* Форма подписки */
 .subscribe-form {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
 
+/* Поле ввода email в подвале */
 .subscribe-form input {
     padding: 8px;
     border-radius: 4px;
@@ -205,6 +249,7 @@ button[type="submit"]:hover {
     flex: 1;
 }
 
+/* Кнопка подписки */
 .subscribe-form button {
     padding: 8px 14px;
     border: none;
@@ -213,12 +258,14 @@ button[type="submit"]:hover {
     border-radius: 4px;
 }
 
+/* Блок социальных сетей */
 .socials {
     display: flex;
     gap: 12px;
     font-size: 14px;
 }
 
+/* Нижняя часть подвала (копирайт, ссылки) */
 .footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
@@ -228,164 +275,179 @@ button[type="submit"]:hover {
     opacity: 0.7;
 }
 
+/* === АДАПТИВНАЯ ВЕРСТКА === */
 
-
-
-
-
-/* ===== ADAPTIVE ===== */
+/* Планшеты и небольшие экраны (до 900px) */
 @media (max-width: 900px) {
+    /* Перестроение сеток одной страницы меню на 2 колонки */
     .offers__grid,
     .popular__grid,
     .footer__grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Скрытие навигации по умолчанию */
     .nav {
         display: none;
     }
-/* Мобильное меню */
-.nav.active {
-    display: block;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: #0b1f1e;
-    padding: 20px 0;
-}
 
-.nav.active .nav__list {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
+    /* Активное состояние мобильного меню */
+    .nav.active {
+        display: block;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #0b1f1e;
+        padding: 20px 0;
+    }
 
+    /* Вертикальное расположение пунктов меню */
+    .nav.active .nav__list {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
 
+    /* Отображение бургер-кнопки */
     .burger {
         display: block;
     }
 }
 
+/* Смартфоны (до 600px) */
 @media (max-width: 600px) {
+    /* Одноколоночные сетки */
     .offers__grid,
     .popular__grid,
     .footer__grid {
         grid-template-columns: 1fr;
     }
 
+    /* Уменьшение заголовка героя */
     .hero__content h1 {
         font-size: 30px;
     }
 }
 
-/* ===============================
-   АДАПТИВ ДЛЯ МОБИЛЬНЫХ
-   =============================== */
+/* === АДАПТИВ ДЛЯ СТРАНИЦЫ КОНТАКТОВ === */
 
+/* Планшеты и небольшие экраны (до 768px) */
 @media (max-width: 768px) {
-
+    /* Шапка с обёрткой элементов */
     .header {
         flex-wrap: wrap;
         padding: 20px;
         gap: 15px;
     }
 
+    /* Навигация во всю ширину */
     .nav {
         width: 100%;
         text-align: center;
     }
 
+    /* Стили ссылок в навигации */
     .nav a {
         display: inline-block;
         margin: 6px 8px;
         font-size: 13px;
     }
 
+    /* Центрирование кнопок */
     .btn {
         margin: 0 auto;
     }
 
-    /* Основная сетка */
+    /* Основная сетка контактов: одна колонка */
     .contacts-page {
         grid-template-columns: 1fr;
         gap: 50px;
         padding: 50px 20px;
     }
 
-    /* Заголовок */
+    /* Уменьшение заголовка контактной информации */
     .contacts-info h1 {
         font-size: 38px;
         margin-bottom: 30px;
     }
 
+    /* Уменьшение текста */
     .contacts-info p {
         font-size: 14px;
     }
 
-    /* Карта */
+    /* Карта: изменение высоты и порядка отображения */
     .map-section {
         height: 280px;
         order: 2;
     }
 
-    /* Форма */
+    /* Форма: изменение порядка отображения */
     .feedback {
         order: 3;
         margin-top: 0;
     }
 
+    /* Уменьшение заголовка формы */
     .feedback h2 {
         font-size: 28px;
         margin-bottom: 20px;
     }
 
+    /* Форма на всю ширину */
     form {
         max-width: 100%;
     }
 
+    /* Поля ввода */
     input,
     textarea {
         font-size: 14px;
     }
 
+    /* Кнопка отправки на всю ширину */
     button[type="submit"] {
         width: 100%;
     }
 }
 
-/* Очень маленькие экраны */
+/* Очень маленькие экраны (до 420px) */
 @media (max-width: 420px) {
-
+    /* Уменьшение логотипа */
     .logo {
         font-size: 20px;
     }
 
+    /* Ещё меньше заголовок контактов */
     .contacts-info h1 {
         font-size: 32px;
     }
 
+    /* Ещё меньше заголовок формы */
     .feedback h2 {
         font-size: 24px;
     }
 }
 
-/* Исправление для textarea - запрет изменения размера */
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ТЕКСТОВОЙ ОБЛАСТИ === */
+
+/* Запрет изменения размера текстовой области */
 textarea {
-    resize: none; /* Запрещаем изменение размера */
+    resize: none;
     width: 100%;
-    min-height: 120px; /* Фиксируем минимальную высоту */
+    min-height: 120px;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Контейнер для textarea с счетчиком */
+/* Контейнер для textarea со счётчиком символов */
 .textarea-wrapper {
     position: relative;
     width: 100%;
     margin-bottom: 5px;
 }
 
-/* Стили для счетчика символов */
+/* Счётчик символов (накладывается поверх textarea) */
 .char-counter {
     position: absolute;
     bottom: 12px;
@@ -401,20 +463,23 @@ textarea {
     transition: all 0.3s ease;
 }
 
-/* Состояния счетчика */
+/* Предупреждение о приближении к лимиту символов */
 .char-counter.warning {
     background: rgba(255, 170, 0, 0.2);
     color: #ffaa00;
     border-color: #ffaa00;
 }
 
+/* Превышение лимита символов */
 .char-counter.danger {
     background: rgba(255, 85, 85, 0.2);
     color: #ff5555;
     border-color: #ff5555;
 }
 
-/* Стили для статуса формы */
+/* === СТАТУС ФОРМЫ (ОТВЕТЫ СЕРВЕРА) === */
+
+/* Блок для отображения статуса отправки формы */
 .form-status {
     margin-top: 15px;
     padding: 12px 15px;
@@ -425,41 +490,56 @@ textarea {
     animation: fadeIn 0.3s ease;
 }
 
+/* Анимация появления статусного сообщения */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
+/* Успешная отправка */
 .form-status.success {
     background: rgba(76, 175, 80, 0.15);
     color: #4caf50;
     border: 1px solid #4caf50;
 }
 
+/* Ошибка отправки */
 .form-status.error {
     background: rgba(244, 67, 54, 0.15);
     color: #f44336;
     border: 1px solid #f44336;
 }
 
+/* Информационное сообщение */
 .form-status.info {
     background: rgba(33, 150, 243, 0.15);
     color: #2196f3;
     border: 1px solid #2196f3;
 }
 
-/* Стили для полей ввода при ошибке */
+/* === ВАЛИДАЦИЯ ПОЛЕЙ === */
+
+/* Стиль для полей с ошибкой валидации */
 input.error, textarea.error {
     border-color: #ff5555 !important;
     box-shadow: 0 0 0 1px rgba(255, 85, 85, 0.3);
 }
 
-/* Анимация для кнопки при отправке */
+/* === АНИМАЦИЯ ОТПРАВКИ === */
+
+/* Состояние "отправка" для кнопки */
 button[type="submit"].sending {
     position: relative;
     color: transparent !important;
 }
 
+/* Спиннер на кнопке во время отправки */
 button[type="submit"].sending::after {
     content: '';
     position: absolute;
@@ -475,9 +555,9 @@ button[type="submit"].sending::after {
     animation: spin 0.8s linear infinite;
 }
 
+/* Анимация вращения спиннера */
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to { 
+        transform: rotate(360deg); 
+    }
 }
-
-
-
