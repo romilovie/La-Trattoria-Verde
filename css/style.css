@@ -1,10 +1,18 @@
-/* ===== RESET / BASE ===== */
+/**
+ * Файл стилей основного интерфейса
+ * Версия 1.0
+ */
+
+/* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+
+/* Сброс отступов и параметров box-sizing для всех элементов */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Основные стили для тела документа */
 body {
     font-family: "Georgia", serif;
     background-color: #0e2b2a;
@@ -12,22 +20,27 @@ body {
     line-height: 1.4;
 }
 
+/* Стили ссылок */
 a {
     color: inherit;
     text-decoration: none;
 }
 
+/* Сброс маркеров списков */
 ul {
     list-style: none;
 }
 
+/* Контейнер-ограничитель для центрирования содержимого */
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* ===== BUTTONS ===== */
+/* === СТИЛИ КНОПОК === */
+
+/* Базовый класс для всех кнопок */
 .btn {
     display: inline-block;
     padding: 12px 26px;
@@ -37,36 +50,44 @@ ul {
     transition: 0.3s;
 }
 
+/* Основная кнопка (заливка) */
 .btn--primary {
     background-color: #9c6b5a;
     color: #fff;
 }
 
+/* Эффект наведения для основной кнопки */
 .btn--primary:hover {
     background-color: #b57d6a;
 }
 
+/* Вторичная кнопка (рамка) */
 .btn--secondary {
     border: 1px solid #ffffff;
     color: #ffffff;
 }
 
+/* Эффект наведения для вторичной кнопки */
 .btn--secondary:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* ===== HEADER ===== */
+/* === ШАПКА САЙТА === */
+
+/* Стили шапки */
 .header {
     background-color: #0b1f1e;
     padding: 18px 0;
 }
 
+/* Внутренний контейнер шапки (flex для выравнивания) */
 .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+/* Стили логотипа */
 .logo {
     font-size: 18px;
     letter-spacing: 2px;
@@ -74,23 +95,27 @@ ul {
     text-transform: uppercase;
 }
 
+/* Список навигации */
 .nav__list {
     display: flex;
     gap: 24px;
     font-size: 14px;
 }
 
+/* Блок с действиями в шапке (телефон, иконки) */
 .header__actions {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
+/* Номер телефона в шапке */
 .header__phone {
     font-size: 14px;
     opacity: 0.9;
 }
 
+/* Кнопка бургер-меню (скрыта на десктопе) */
 .burger {
     display: none;
     background: none;
@@ -99,7 +124,9 @@ ul {
     color: #fff;
 }
 
-/* ===== HERO ===== */
+/* === ГЛАВНЫЙ БАННЕР (HERO) === */
+
+/* Блок героя на всю высоту экрана с градиентным затемнением фона */
 .hero {
     height: 90vh;
     background: linear-gradient(
@@ -112,96 +139,111 @@ ul {
     text-align: center;
 }
 
+/* Заголовок в блоке героя */
 .hero__content h1 {
     font-size: 42px;
     margin-bottom: 12px;
 }
 
+/* Описание в блоке героя */
 .hero__content p {
     font-size: 16px;
     opacity: 0.85;
     margin-bottom: 30px;
 }
 
+/* Контейнер для кнопок в блоке героя */
 .hero__buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-/* ===== OFFERS ===== */
+/* === БЛОК "АКЦИИ" / ПРЕИМУЩЕСТВА === */
+
+/* Секция с акциями/предложениями */
 .offers {
     padding: 80px 0;
     text-align: center;
 }
 
+/* Заголовок секции */
 .offers h2 {
     font-size: 26px;
     margin-bottom: 50px;
 }
 
+/* Сетка карточек предложений */
 .offers__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
+/* Карточка отдельного предложения */
 .offer-card {
     background-color: #0b1f1e;
     padding: 20px;
     border-radius: 8px;
 }
 
+/* Заголовок карточки предложения */
 .offer-card h3 {
     font-size: 18px;
     margin-bottom: 10px;
 }
 
+/* Текст карточки предложения */
 .offer-card p {
     font-size: 14px;
     opacity: 0.8;
 }
 
-/* ===== POPULAR DISHES ===== */
+/* === БЛОК "ПОПУЛЯРНЫЕ БЛЮДА" === */
+
+/* Секция популярных блюд */
 .popular {
     padding: 80px 0;
     text-align: center;
 }
 
+/* Заголовок секции */
 .popular h2 {
     font-size: 26px;
     margin-bottom: 50px;
 }
 
+/* Сетка карточек блюд */
 .popular__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
+/* Карточка блюда */
 .dish-card {
     background-color: #000;
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    /* Убираем aspect-ratio, карточка подстраивается под размер картинки */
 }
 
+/* Контейнер для изображения блюда */
 .dish-card__image {
     width: 100%;
     position: relative;
     overflow: hidden;
-    /* Высота автоматическая, подстраивается под картинку */
 }
 
+/* Изображение блюда с анимацией при наведении */
 .dish-card__image img {
     width: 100%;
-    height: auto; /* Автоматическая высота, сохраняем пропорции */
+    height: auto;
     display: block;
     transition: transform 0.5s ease;
 }
 
-/* Затемнение градиентом снизу */
+/* Псевдоэлемент для градиентного затемнения снизу картинки */
 .dish-card__image::after {
     content: '';
     position: absolute;
@@ -214,49 +256,56 @@ ul {
     z-index: 1;
 }
 
-/* Название блюда поверх картинки */
+/* Название блюда, наложенное поверх картинки */
 .dish-card h3 {
     position: absolute;
     bottom: 15px;
     left: 0;
     width: 100%;
     padding: 12px;
-    font-size: 16px; /* Немного увеличил размер */
+    font-size: 16px;
     color: white;
     z-index: 2;
     margin: 0;
     text-align: center;
     font-weight: 500;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Добавил тень для лучшей читаемости */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Анимация приближения при наведении */
+/* Увеличение картинки при наведении на карточку */
 .dish-card:hover .dish-card__image img {
     transform: scale(1.1);
 }
 
+/* Кнопка "Смотреть всё" в блоке популярных блюд */
 .popular__button {
     margin-top: 40px;
 }
 
-/* ===== CTA ===== */
+/* === ПРИЗЫВ К ДЕЙСТВИЮ (CTA) === */
+
+/* Секция с призывом к действию */
 .cta {
     background-color: #0b3a38;
     padding: 80px 20px;
     text-align: center;
 }
 
+/* Заголовок в секции CTA */
 .cta h2 {
     font-size: 28px;
     margin-bottom: 30px;
 }
 
-/* ===== FOOTER ===== */
+/* === ПОДВАЛ САЙТА === */
+
+/* Стили подвала */
 .footer {
     background-color: #081817;
     padding: 60px 0 20px;
 }
 
+/* Сетка колонок подвала */
 .footer__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -264,11 +313,13 @@ ul {
     margin-bottom: 40px;
 }
 
+/* Заголовок колонки подвала */
 .footer__column h3 {
     font-size: 16px;
     margin-bottom: 15px;
 }
 
+/* Текст и пункты списка в подвале */
 .footer__column p,
 .footer__column li {
     font-size: 14px;
@@ -276,12 +327,14 @@ ul {
     margin-bottom: 8px;
 }
 
+/* Форма подписки */
 .subscribe-form {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
 
+/* Поле ввода email */
 .subscribe-form input {
     padding: 8px;
     border-radius: 4px;
@@ -289,6 +342,7 @@ ul {
     flex: 1;
 }
 
+/* Кнопка подписки */
 .subscribe-form button {
     padding: 8px 14px;
     border: none;
@@ -297,12 +351,14 @@ ul {
     border-radius: 4px;
 }
 
+/* Блок социальных сетей */
 .socials {
     display: flex;
     gap: 12px;
     font-size: 14px;
 }
 
+/* Нижняя часть подвала (копирайт, ссылки) */
 .footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
@@ -312,31 +368,23 @@ ul {
     opacity: 0.7;
 }
 
-/* ===== ADAPTIVE ===== */
+/* === АДАПТИВНАЯ ВЕРСТКА === */
+
+/* Планшеты и небольшие экраны (до 900px) */
 @media (max-width: 900px) {
+    /* Перестроение сеток на 2 колонки */
     .offers__grid,
     .popular__grid,
     .footer__grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .nav {
-        display: none;
-    }
-/* Мобильное меню */
-@media (max-width: 900px) {
-    .offers__grid,
-    .popular__grid,
-    .footer__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Скрываем навигацию по умолчанию */
+    /* Скрытие навигации по умолчанию */
     .nav {
         display: none;
     }
 
-    /* Показываем бургер */
+    /* Отображение бургер-кнопки */
     .burger {
         display: block;
         cursor: pointer;
@@ -350,7 +398,7 @@ ul {
         padding: 0;
     }
 
-    /* Активное меню */
+    /* Активное состояние мобильного меню */
     .nav.active {
         display: block;
         position: fixed;
@@ -365,6 +413,7 @@ ul {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
+    /* Вертикальное расположение пунктов меню в активном состоянии */
     .nav.active .nav__list {
         flex-direction: column;
         align-items: center;
@@ -388,14 +437,14 @@ ul {
         background-color: rgba(255, 255, 255, 0.05);
     }
 
-    /* Предотвращаем прокрутку body при открытом меню */
+    /* Блокировка прокрутки body при открытом меню */
     body.menu-open {
         overflow: hidden;
         position: fixed;
         width: 100%;
     }
 
-    /* Фиксируем хеддер */
+    /* Фиксация шапки при прокрутке */
     .header {
         position: sticky;
         top: 0;
@@ -408,22 +457,27 @@ ul {
     }
 }
 
+/* Смартфоны (до 600px) */
 @media (max-width: 600px) {
+    /* Одно колоночные сетки */
     .offers__grid,
     .popular__grid,
     .footer__grid {
         grid-template-columns: 1fr;
     }
 
+    /* Уменьшение заголовка героя */
     .hero__content h1 {
         font-size: 30px;
     }
     
+    /* Корректировка позиции мобильного меню */
     .nav.active {
         top: 60px;
         max-height: calc(100vh - 60px);
     }
     
+    /* Кнопки героя в колонку */
     .hero__buttons {
         flex-direction: column;
         align-items: center;
@@ -435,38 +489,58 @@ ul {
         max-width: 280px;
     }
     
+    /* Уменьшение телефона в шапке */
     .header__phone {
         font-size: 13px;
     }
     
+    /* Уменьшение базовых отступов кнопок */
     .btn {
         padding: 10px 22px;
         font-size: 13px;
     }
+
+    /* Сетка популярных блюд - одна колонка */
+    .popular__grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Центрирование карточки блюда */
+    .dish-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }
-/* Исправления для очень маленьких экранов */
+
+/* Очень маленькие экраны (до 480px) */
 @media (max-width: 480px) {
+    /* Увеличение отступов контейнера */
     .container {
         width: 95%;
         padding: 0 10px;
     }
     
+    /* Скрытие телефона на очень маленьких экранах */
     .header__phone {
         display: none;
     }
     
+    /* Уменьшение отступов блока действий */
     .header__actions {
         gap: 10px;
     }
     
+    /* Уменьшение логотипа */
     .logo {
         font-size: 16px;
     }
     
+    /* Уменьшение высоты героя */
     .hero {
         height: 85vh;
     }
     
+    /* Уменьшение заголовка героя */
     .hero__content h1 {
         font-size: 26px;
     }
@@ -475,6 +549,7 @@ ul {
         font-size: 14px;
     }
     
+    /* Уменьшение вертикальных отступов секций */
     .offers, .popular, .cta {
         padding: 50px 0;
     }
@@ -488,37 +563,16 @@ ul {
     }
 }
 
-/* Предотвращение горизонтального скролла */
+/* === ГЛОБАЛЬНЫЕ ИСПРАВЛЕНИЯ === */
+
+/* Запрет горизонтальной прокрутки страницы */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-/* Улучшаем доступность */
+/* Стиль фокуса для бургер-кнопки (доступность) */
 .burger:focus {
     outline: 2px solid #9c6b5a;
     outline-offset: 2px;
 }
-
-/* Адаптация для популярных блюд на разных экранах */
-@media (max-width: 900px) {
-    .popular__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .popular__grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .dish-card {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-}
-    
-
-
-
-
