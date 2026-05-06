@@ -1,3 +1,10 @@
+/**
+ * Файл стилей для страницы новостей
+ */
+
+/* === БАЗОВЫЕ СТИЛИ СТРАНИЦЫ === */
+
+/* Основные стили для body страницы новостей */
 body {
     margin: 0;
     font-family: "Georgia", serif;
@@ -5,12 +12,16 @@ body {
     color: #1f2d2a;
 }
 
+/* === ОСНОВНОЙ КОНТЕЙНЕР СТРАНИЦЫ НОВОСТЕЙ === */
+
+/* Контейнер для всего блока новостей */
 .news {
     max-width: 1100px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
+/* Заголовок страницы новостей */
 .page-title {
     text-align: center;
     font-size: 36px;
@@ -18,42 +29,53 @@ body {
     color: #ffffff;
 }
 
+/* === СПИСОК НОВОСТЕЙ === */
+
+/* Контейнер для списка новостных карточек */
 .news-list {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
+/* === КАРТОЧКА НОВОСТИ === */
+
+/* Стиль отдельной карточки новости */
 .news-card {
     display: flex;
     background: #ffffff;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
+/* Левая часть карточки (изображение и краткая информация) */
 .news-left {
     width: 40%;
     padding: 25px;
     background: #243833;
 }
 
+/* Дата публикации новости */
 .news-date {
     font-size: 14px;
     color: #ffffff;
 }
 
+/* Заголовок новости */
 .news-title {
     margin: 10px 0 15px;
     font-size: 22px;
     color: #ffffff;
 }
 
+/* Изображение новости */
 .news-left img {
     width: 100%;
     border-radius: 12px;
 }
 
+/* Правая часть карточки (текст новости) */
 .news-right {
     width: 60%;
     padding: 25px;
@@ -63,21 +85,25 @@ body {
     background: #162e28;
 }
 
+/* Краткое содержание новости (анонс) */
 .news-preview {
     font-size: 16px;
     margin-bottom: 10px;
 }
 
+/* Полный текст новости (скрыт по умолчанию) */
 .news-full {
     display: none;
     margin-bottom: 15px;
     line-height: 1.6;
 }
 
+/* Отображение полного текста при открытой карточке */
 .news-card.open .news-full {
     display: block;
 }
 
+/* Кнопка "Читать далее"/"Свернуть" */
 .news-btn {
     align-self: flex-start;
     background: #0f3d2e;
@@ -89,20 +115,23 @@ body {
     transition: background 0.3s;
 }
 
+/* Эффект наведения на кнопку новости */
 .news-btn:hover {
     background: #145c44;
 }
 
-/* Адаптив */
+/* === АДАПТИВНАЯ ВЕРСТКА === */
+
+/* Планшеты и смартфоны (до 768px) */
 @media (max-width: 768px) {
+    /* Переключение карточки на вертикальное расположение */
     .news-card {
         flex-direction: column;
     }
 
+    /* Левая и правая части занимают всю ширину */
     .news-left,
     .news-right {
         width: 100%;
     }
 }
-
-
