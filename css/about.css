@@ -1,30 +1,42 @@
+/**
+ * Файл стилей для страницы "О ресторане"
+ */
+
+/* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+
+/* Сброс отступов и параметров box-sizing для всех элементов */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Основные стили для тела документа */
 body {
     background: radial-gradient(circle at top, #0e2a2c, #020c0d);
     color: #f2e9e4;
     font-family: 'Montserrat', sans-serif;
 }
 
+/* === СЕКЦИИ СТРАНИЦЫ === */
 
-/* SECTIONS */
+/* Базовый класс для всех секций */
 .section {
     padding: 80px 60px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Заголовки секций (декоративный шрифт) */
 .section h2 {
     font-family: 'Playfair Display', serif;
     font-size: 48px;
     margin-bottom: 30px;
 }
 
-/* HISTORY */
+/* === СЕКЦИЯ "ИСТОРИЯ" === */
+
+/* Текст в секции истории ресторана */
 .history p {
     max-width: 700px;
     font-size: 16px;
@@ -32,7 +44,9 @@ body {
     color: #d6cfc9;
 }
 
-/* TEAM */
+/* === СЕКЦИЯ "КОМАНДА" === */
+
+/* Сетка карточек команды (гибкая, с центрированием) */
 .team-cards {
     display: flex;
     gap: 80px;
@@ -41,11 +55,13 @@ body {
     justify-content: center;
 }
 
+/* Карточка отдельного сотрудника */
 .team-card {
     text-align: center;
     flex: 0 1 auto;
 }
 
+/* Аватар (круглая рамка) */
 .avatar {
     width: 140px;
     height: 140px;
@@ -55,24 +71,29 @@ body {
     border: 3px solid #8b5e52;
 }
 
+/* Изображение внутри аватара */
 .avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* Имя сотрудника */
 .team-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
     margin-bottom: 5px;
 }
 
+/* Должность сотрудника */
 .team-card span {
     font-size: 14px;
     color: #c89b7b;
 }
 
-/* INTERIOR */
+/* === СЕКЦИЯ "ИНТЕРЬЕР" === */
+
+/* Сетка галереи изображений интерьера */
 .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -80,6 +101,7 @@ body {
     margin-top: 40px;
 }
 
+/* Изображения в галерее */
 .gallery img {
     width: 100%;
     height: 220px;
@@ -89,37 +111,44 @@ body {
     border-radius: 4px;
 }
 
+/* Эффект наведения на изображения галереи */
 .gallery img:hover {
     transform: scale(1.05);
     filter: brightness(1);
 }
 
-/* ===== МОБИЛЬНЫЕ СТИЛИ ===== */
+/* === АДАПТИВНАЯ ВЕРСТКА === */
 
-/* Планшеты */
+/* Планшеты (до 900px) */
 @media (max-width: 900px) {
+    /* Уменьшение отступов секций */
     .section {
         padding: 60px 30px;
     }
 
+    /* Уменьшение заголовков секций */
     .section h2 {
         font-size: 40px;
     }
 
+    /* Галерея: 2 колонки вместо 4 */
     .gallery {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Уменьшение отступов между карточками команды */
     .team-cards {
         gap: 40px;
     }
 
-    /* Мобильное меню */
+    /* === МОБИЛЬНОЕ МЕНЮ (интеграция с основным меню сайта) === */
+
+    /* Скрытие навигации по умолчанию */
     .nav {
         display: none;
     }
 
-
+    /* Активное состояние мобильного меню */
     .nav.active {
         display: block;
         position: fixed;
@@ -134,6 +163,7 @@ body {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
+    /* Вертикальное расположение пунктов меню в активном состоянии */
     .nav.active .nav__list {
         flex-direction: column;
         align-items: center;
@@ -157,76 +187,89 @@ body {
         background-color: rgba(255, 255, 255, 0.05);
     }
 
+    /* Блокировка прокрутки body при открытом меню */
     body.menu-open {
         overflow: hidden;
         position: fixed;
         width: 100%;
     }
-
 }
 
-/* Телефоны */
+/* Смартфоны (до 600px) */
 @media (max-width: 600px) {
+    /* Уменьшение отступов секций */
     .section {
         padding: 40px 20px;
     }
 
+    /* Ещё большее уменьшение заголовков с центрированием */
     .section h2 {
         font-size: 32px;
         text-align: center;
     }
 
+    /* Центрирование текста истории */
     .history p {
         text-align: center;
         margin: 0 auto;
         font-size: 15px;
     }
 
+    /* Карточки команды в колонку */
     .team-cards {
         flex-direction: column;
         align-items: center;
         gap: 30px;
     }
 
+    /* Уменьшение аватаров */
     .avatar {
         width: 120px;
         height: 120px;
     }
 
+    /* Галерея: одна колонка */
     .gallery {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 
+    /* Уменьшение высоты изображений галереи */
     .gallery img {
         height: 200px;
     }
 
+    /* Отключение эффекта масштабирования на сенсорных экранах */
     .gallery img:hover {
-        transform: none; /* Убираем эффект на телефонах для лучшей производительности */
+        transform: none;
     }
 
+    /* Корректировка позиции мобильного меню (меньшая высота шапки) */
     .nav.active {
         top: 62px;
         max-height: calc(100vh - 62px);
     }
 }
 
-/* Очень маленькие телефоны */
+/* Очень маленькие смартфоны (до 380px) */
 @media (max-width: 380px) {
-
+    /* Максимальное уменьшение заголовков секций */
     .section h2 {
         font-size: 28px;
     }
 }
 
-/* Предотвращение горизонтального скролла */
+/* === ГЛОБАЛЬНЫЕ ИСПРАВЛЕНИЯ === */
+
+/* Запрет горизонтальной прокрутки страницы */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-/* Анимация появления секций (подключается через about.js) */
+/* === АНИМАЦИИ === */
+
+/* Анимация появления секций (управляется через about.js) */
 .section {
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
