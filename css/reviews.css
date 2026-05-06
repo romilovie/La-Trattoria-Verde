@@ -1,11 +1,19 @@
-/* Основные стили для страницы отзывов */
+/**
+ * Файл стилей для страницы отзывов
+ */
+
+/* === ОСНОВНЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ОТЗЫВОВ === */
+
+/* Заголовок страницы отзывов */
 h1 {
-  text-align: center;
-  margin: 30px 0;
-  color: #ffffff;
+    text-align: center;
+    margin: 30px 0;
+    color: #ffffff;
 }
 
-/* ===== СЛАЙДЕР ===== */
+/* === БЛОК СЛАЙДЕРА ОТЗЫВОВ === */
+
+/* Контейнер слайдера с кнопками навигации */
 .reviews-slider {
     display: flex;
     align-items: center;
@@ -16,6 +24,7 @@ h1 {
     margin-bottom: 40px;
 }
 
+/* Окно слайдера (видимая область с отзывами) */
 .slider-window {
     width: 330px;
     overflow: hidden;
@@ -23,6 +32,7 @@ h1 {
     touch-action: pan-y pinch-zoom;
 }
 
+/* Дорожка слайдера (контейнер для перемещаемых карточек) */
 .slider-track {
     display: flex;
     transition: transform 0.3s ease;
@@ -30,6 +40,9 @@ h1 {
     will-change: transform;
 }
 
+/* === КАРТОЧКА ОТЗЫВА === */
+
+/* Стиль отдельной карточки отзыва */
 .review-card {
     flex: 0 0 auto;
     width: 300px;
@@ -46,6 +59,7 @@ h1 {
     max-height: 350px;
 }
 
+/* Имя автора отзыва */
 .review-card h3 {
     margin: 0 0 15px 0;
     font-size: 18px;
@@ -55,6 +69,7 @@ h1 {
     overflow-wrap: break-word;
 }
 
+/* Текст отзыва */
 .review-card .text {
     flex: 1;
     margin: 10px 0;
@@ -68,20 +83,24 @@ h1 {
     max-height: 150px;
 }
 
+/* Стилизация скроллбара для текста отзыва */
 .review-card .text::-webkit-scrollbar {
     width: 4px;
 }
 
+/* Дорожка скроллбара */
 .review-card .text::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
 }
 
+/* Ползунок скроллбара */
 .review-card .text::-webkit-scrollbar-thumb {
     background: #9c6b5a;
     border-radius: 4px;
 }
 
+/* Нижняя часть карточки (рейтинг и дата) */
 .review-card .card-footer {
     display: flex;
     justify-content: space-between;
@@ -91,19 +110,23 @@ h1 {
     padding-top: 10px;
 }
 
+/* Звёзды рейтинга */
 .review-card .rating {
     color: #f5b400;
     font-size: 16px;
     letter-spacing: 2px;
 }
 
+/* Дата публикации отзыва */
 .review-card .date {
     font-size: 12px;
     opacity: 0.6;
     color: #2d4736;
 }
 
-/* ===== СТРЕЛКИ ===== */
+/* === СТРЕЛКИ НАВИГАЦИИ СЛАЙДЕРА === */
+
+/* Кнопки-стрелки для прокрутки слайдера */
 .arrow {
     border: none;
     background: #9c6b5a;
@@ -116,27 +139,33 @@ h1 {
     line-height: 1;
 }
 
+/* Эффект наведения на стрелки */
 .arrow:hover {
     background: #b57d6a;
 }
 
+/* Отключённые стрелки (начало/конец слайдера) */
 .arrow:disabled {
     opacity: 0.3;
     cursor: not-allowed;
 }
 
-/* ===== ФОРМА ОТЗЫВА ===== */
+/* === ФОРМА ДОБАВЛЕНИЯ ОТЗЫВА === */
+
+/* Секция с формой добавления отзыва */
 .review-form-section {
     max-width: 500px;
     margin: 0 auto 50px;
     padding: 0 20px;
 }
 
+/* Кнопка переключения видимости формы */
 .form-toggle {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Стиль кнопки переключения формы */
 .btn-form-toggle {
     padding: 12px 30px;
     border: none;
@@ -148,10 +177,12 @@ h1 {
     transition: background 0.3s;
 }
 
+/* Эффект наведения для кнопки переключения формы */
 .btn-form-toggle:hover {
     background: #b57d6a;
 }
 
+/* Контейнер формы добавления отзыва */
 .form-container {
     background: #8db098;
     border-radius: 16px;
@@ -159,21 +190,27 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* Скрытое состояние формы */
 .form-container.hidden {
     display: none;
 }
 
+/* Заголовок формы */
 .form-container h2 {
     color: #1f3627;
     margin-bottom: 20px;
     text-align: center;
 }
 
+/* === КОМПОНЕНТ ВЫБОРА ЗВЁЗД === */
+
+/* Контейнер для звёзд рейтинга */
 .stars {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Символы звёзд */
 .stars span {
     font-size: 32px;
     cursor: pointer;
@@ -181,10 +218,14 @@ h1 {
     transition: color 0.2s;
 }
 
+/* Активная звезда (выбранная пользователем) */
 .stars span.active {
     color: #f5b400;
 }
 
+/* === ПОЛЯ ВВОДА ФОРМЫ === */
+
+/* Поле ввода имени */
 #nameInput,
 #textInput {
     width: 100%;
@@ -197,18 +238,21 @@ h1 {
     color: #1f3627;
 }
 
+/* Фокус на полях ввода */
 #nameInput:focus,
 #textInput:focus {
     outline: none;
     border-color: #9c6b5a;
 }
 
+/* Текстовая область для отзыва */
 #textInput {
     resize: vertical;
     min-height: 100px;
     max-height: 200px;
 }
 
+/* Счётчик символов */
 .char-counter {
     text-align: right;
     font-size: 12px;
@@ -217,6 +261,7 @@ h1 {
     opacity: 0.8;
 }
 
+/* Кнопка отправки отзыва */
 .btn-submit {
     width: 100%;
     padding: 12px;
@@ -229,10 +274,12 @@ h1 {
     transition: background 0.3s;
 }
 
+/* Эффект наведения для кнопки отправки */
 .btn-submit:hover {
     background: #333333;
 }
 
+/* Сообщение благодарности после отправки */
 .thank-you-message {
     text-align: center;
     color: #1f3627;
@@ -243,95 +290,112 @@ h1 {
     border-radius: 8px;
 }
 
+/* Скрытое сообщение */
 .thank-you-message.hidden {
     display: none;
 }
 
-/* ===== АДАПТИВ ===== */
+/* === АДАПТИВНАЯ ВЕРСТКА === */
+
+/* Планшеты (до 768px) */
 @media (max-width: 768px) {
+    /* Уменьшение ширины окна слайдера */
     .slider-window {
         width: 280px;
     }
     
+    /* Уменьшение карточки отзыва */
     .review-card {
         width: 250px;
         min-height: 280px;
     }
     
+    /* Уменьшение максимальной высоты текста */
     .review-card .text {
         max-height: 140px;
     }
     
+    /* Уменьшение стрелок */
     .arrow {
         font-size: 24px;
         padding: 4px 12px;
     }
 }
 
+/* Смартфоны (до 480px) */
 @media (max-width: 480px) {
+    /* Уменьшение заголовка */
     h1 {
         font-size: 24px;
         margin: 20px 0;
     }
     
+    /* Уменьшение отступа между стрелками и окном */
     .reviews-slider {
         gap: 5px;
     }
     
+    /* Уменьшение окна слайдера */
     .slider-window {
         width: 240px;
     }
     
+    /* Уменьшение карточки отзыва */
     .review-card {
         width: 220px;
         padding: 15px;
         min-height: 260px;
     }
     
+    /* Уменьшение имени автора */
     .review-card h3 {
         font-size: 16px;
         margin-bottom: 10px;
     }
     
+    /* Уменьшение текста отзыва */
     .review-card .text {
         font-size: 13px;
         max-height: 130px;
     }
     
+    /* Скрытие стрелок на мобильных устройствах */
     .arrow {
-        display: none; /* Стрелки скрыты на мобильных */
+        display: none;
     }
     
+    /* Окно слайдера на всю доступную ширину */
     .slider-window {
         width: 100%;
         max-width: 280px;
     }
     
+    /* Уменьшение отступов формы */
     .form-container {
         padding: 20px;
     }
     
+    /* Уменьшение размера звёзд */
     .stars span {
         font-size: 28px;
     }
 }
 
+/* Очень маленькие смартфоны (до 360px) */
 @media (max-width: 360px) {
+    /* Максимальная ширина окна слайдера */
     .slider-window {
         max-width: 240px;
     }
     
+    /* Уменьшение карточки отзыва */
     .review-card {
         width: 200px;
         min-height: 250px;
     }
     
+    /* Уменьшение максимальной высоты текста */
     .review-card .text {
         max-height: 120px;
     }
 }
-
-
-
-
-
