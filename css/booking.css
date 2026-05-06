@@ -1,3 +1,10 @@
+/**
+ * Файл стилей для страницы бронирования и страницы успеха
+ */
+
+/* === БАЗОВЫЕ СТИЛИ СТРАНИЦЫ === */
+
+/* Основные стили для body страницы бронирования */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -5,17 +12,20 @@ body {
     color: #2c2c2c;
 }
 
+/* Стили шапки страницы */
 header {
     padding: 20px;
     background: #1f4d45;
 }
 
+/* Логотип в шапке */
 .logo {
     color: #fff;
     text-decoration: none;
     font-size: 22px;
 }
 
+/* Основной контейнер страницы бронирования */
 .booking {
     text-align: center;
     padding: 40px 20px;
@@ -23,7 +33,9 @@ header {
     margin: 0 auto;
 }
 
-/* ===== СХЕМА ЗАЛА ===== */
+/* === СХЕМА ЗАЛА (ОСНОВНАЯ) === */
+
+/* Сетка схемы зала 3x3 */
 .hall {
     display: grid;
     grid-template-columns: repeat(3, minmax(140px, 166px));
@@ -35,6 +47,7 @@ header {
     max-width: 100%;
 }
 
+/* Стиль отдельного стола */
 .table {
     border-radius: 12px;
     padding: 10px;
@@ -51,42 +64,37 @@ header {
     height: 100%;
 }
 
+/* Дополнительная информация о столе (количество мест) */
 .table span {
     font-size: 12px;
     opacity: 0.7;
 }
 
+/* Эффект наведения для свободного стола */
 .free:hover {
     border-color: #1f4d45;
 }
 
+/* Стиль занятого стола */
 .busy {
     background: #828282;
     cursor: not-allowed;
 }
 
+/* Стиль выбранного стола */
 .selected {
     border-color: #f1b400;
     background: #ccb970;
 }
 
-/* Позиции */
-/*
-.table-1 { grid-column: 1; grid-row: 2; }
-.table-2 { grid-column: 1; grid-row: 3; }
+/* === ИНФОРМАЦИЯ О ВЫБРАННОМ === */
 
-.table-3 { grid-column: 2; grid-row: 1; }
-.table-4 { grid-column: 3; grid-row: 1; }
-
-.table-5 { grid-column: 2; grid-row: 3; }
-.table-6 { grid-column: 3; grid-row: 3; }
-*/
-
-/* ===== ИНФО ===== */
+/* Блок с итоговой информацией о бронировании */
 .summary {
     margin: 20px 0;
 }
 
+/* Стили кнопок */
 button {
     padding: 12px 24px;
     border: none;
@@ -96,25 +104,30 @@ button {
     color: white;
 }
 
+/* Отключённая кнопка */
 button:disabled {
     background: #aaa;
     cursor: not-allowed;
 }
 
-/* ===== МОДАЛКИ ===== */
+/* === МОДАЛЬНЫЕ ОКНА === */
+
+/* Затемнённый фон модального окна */
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Класс для скрытия элементов */
 .hidden {
     display: none;
 }
 
+/* Контент модального окна */
 .modal-content {
     background: #0e2b2a;
     color: #ffffff;
@@ -124,6 +137,7 @@ button:disabled {
     max-width: 420px;
 }
 
+/* Контейнер для кнопок выбора времени */
 .times {
     display: flex;
     gap: 10px;
@@ -131,35 +145,39 @@ button:disabled {
     margin: 15px 0;
 }
 
+/* Кнопка выбора времени */
 .time {
     background: #e4f1ee;
     color: #000;
 }
 
+/* Занятое время в модальном окне */
 .time.busy {
     background: #ccc;
 }
 
+/* Выбранное время в модальном окне */
 .time.selected {
     background: #f1b400;
 }
 
+/* Действия в модальном окне (кнопки) */
 .modal-actions {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
+/* Поля ввода и текстовая область */
 input, textarea {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
 }
 
-/* ===============================
-   АДАПТИВ ДЛЯ СТРАНИЦЫ БРОНИРОВАНИЯ
-   =============================== */
+/* === АДАПТИВНАЯ ВЕРСТКА ДЛЯ СТРАНИЦЫ БРОНИРОВАНИЯ === */
 
+/* Планшеты (до 900px) */
 @media (max-width: 900px) {
     .booking {
         padding: 30px 15px;
@@ -170,6 +188,7 @@ input, textarea {
         margin-bottom: 30px;
     }
     
+    /* Уменьшение размеров сетки зала */
     .hall {
         grid-template-columns: repeat(3, 120px);
         grid-template-rows: repeat(3, 86px);
@@ -186,6 +205,7 @@ input, textarea {
     }
 }
 
+/* Небольшие планшеты (до 768px) */
 @media (max-width: 768px) {
     .hall {
         grid-template-columns: repeat(3, 106px);
@@ -198,6 +218,7 @@ input, textarea {
     }
 }
 
+/* Смартфоны (до 600px) */
 @media (max-width: 600px) {
     .booking h1 {
         font-size: 24px;
@@ -218,6 +239,7 @@ input, textarea {
         font-size: 10px;
     }
     
+    /* Перенастройка блока итоговой информации */
     .summary {
         display: block;
         text-align: center;
@@ -231,10 +253,6 @@ input, textarea {
         margin: 0 5px;
     }
     
-    .summary::before {
-        display: none;
-    }
-    
     .summary br {
         display: none;
     }
@@ -245,6 +263,7 @@ input, textarea {
     }
 }
 
+/* Маленькие смартфоны (до 500px) */
 @media (max-width: 500px) {
     .hall {
         grid-template-columns: repeat(3, 80px);
@@ -267,6 +286,7 @@ input, textarea {
     }
 }
 
+/* Очень маленькие смартфоны (до 450px) */
 @media (max-width: 450px) {
     .hall {
         grid-template-columns: repeat(3, 73px);
@@ -279,6 +299,7 @@ input, textarea {
     }
 }
 
+/* Экстремально маленькие смартфоны (до 400px) */
 @media (max-width: 400px) {
     .booking h1 {
         font-size: 22px;
@@ -296,6 +317,7 @@ input, textarea {
         padding: 3px;
     }
     
+    /* Скрытие текста "мест" и отображение количества через псевдоэлемент */
     .table span {
         font-size: 8px;
         display: none;
@@ -326,12 +348,9 @@ input, textarea {
     .summary br {
         display: block;
     }
-    
-    .summary strong:first-of-type::before {
-        display: none;
-    }
 }
 
+/* Смартфоны шириной до 360px */
 @media (max-width: 360px) {
     .hall {
         grid-template-columns: repeat(3, 53px);
@@ -343,6 +362,7 @@ input, textarea {
     }
 }
 
+/* Смартфоны шириной до 320px */
 @media (max-width: 320px) {
     .hall {
         grid-template-columns: repeat(3, 47px);
@@ -369,8 +389,9 @@ input, textarea {
     }
 }
 
-/* ================= SUCCESS PAGE ================= */
+/* === СТРАНИЦА УСПЕШНОГО БРОНИРОВАНИЯ (SUCCESS) === */
 
+/* Контейнер страницы успеха с фоновым изображением */
 .success {
     min-height: 100vh;
     background:
@@ -385,16 +406,19 @@ input, textarea {
     color: #fff;
 }
 
+/* Главный заголовок страницы успеха */
 .success h1 {
     font-size: 48px;
     margin-bottom: 20px;
 }
 
+/* Вторичный заголовок страницы успеха */
 .success h2 {
     font-size: 28px;
     margin-bottom: 20px;
 }
 
+/* Текст на странице успеха */
 .success p {
     max-width: 700px;
     font-size: 16px;
@@ -403,6 +427,7 @@ input, textarea {
     opacity: 0.9;
 }
 
+/* Кнопка возврата на главную */
 .success a {
     display: inline-block;
     margin-top: 20px;
@@ -414,8 +439,9 @@ input, textarea {
     letter-spacing: 1px;
 }
 
-/* ===== НОВЫЕ СТИЛИ ДЛЯ ОБНОВЛЕННОЙ СТРАНИЦЫ БРОНИРОВАНИЯ ===== */
+/* === НОВЫЕ СТИЛИ ДЛЯ ОБНОВЛЁННОЙ СТРАНИЦЫ БРОНИРОВАНИЯ === */
 
+/* Блок выбора даты и времени */
 .date-time-selection {
     background: #0b1f1e;
     padding: 30px;
@@ -423,10 +449,12 @@ input, textarea {
     margin-bottom: 40px;
 }
 
+/* Обёртка для календаря */
 .calendar-wrapper {
     margin-bottom: 20px;
 }
 
+/* Поле выбора даты */
 .date-picker {
     width: 100%;
     padding: 12px;
@@ -437,21 +465,18 @@ input, textarea {
     font-size: 16px;
 }
 
+/* Плейсхолдер для поля даты */
 .date-picker::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Блок с временными слотами */
 .time-slots h3 {
     color: #fff;
     margin-bottom: 15px;
 }
 
-.times {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
+/* Кнопка выбора времени (обновлённый стиль) */
 .time {
     padding: 10px 20px;
     border-radius: 20px;
@@ -462,16 +487,19 @@ input, textarea {
     transition: all 0.3s;
 }
 
+/* Эффект наведения для доступного времени */
 .time:hover:not(.busy):not(.past) {
     background: #9c6b5a;
 }
 
+/* Выбранное время */
 .time.selected {
     background: #f1b400;
     border-color: #f1b400;
     color: #000;
 }
 
+/* Занятое время */
 .time.busy {
     background: #828282;
     border-color: #828282;
@@ -479,6 +507,7 @@ input, textarea {
     opacity: 0.5;
 }
 
+/* Прошедшее время (недоступно для выбора) */
 .time.past {
     background: #444;
     border-color: #444;
@@ -486,7 +515,9 @@ input, textarea {
     opacity: 0.3;
 }
 
-/* ===== НОВАЯ СХЕМА ЗАЛА С РАЗДЕЛИТЕЛЕМ ===== */
+/* === НОВАЯ СХЕМА ЗАЛА С РАЗДЕЛИТЕЛЕМ (основной зал и терраса) === */
+
+/* Гибкий контейнер для двух зон зала */
 .hall-layout {
     display: flex;
     gap: 40px;
@@ -497,6 +528,7 @@ input, textarea {
     width: 100%;
 }
 
+/* Стили для основного зала и террасы */
 .main-hall, .terrace-hall {
     flex: 1;
     min-width: 300px;
@@ -504,12 +536,14 @@ input, textarea {
     margin: 0 auto;
 }
 
+/* Заголовки зон зала */
 .main-hall h3, .terrace-hall h3 {
     text-align: center;
     margin-bottom: 20px;
     color: #9c6b5a;
 }
 
+/* Декоративный разделитель между залами */
 .hall-divider {
     width: 2px;
     height: 300px;
@@ -517,6 +551,7 @@ input, textarea {
     margin: 0 10px;
 }
 
+/* Сетка основного зала (3x3) */
 .main-hall-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(100px, 1fr));
@@ -526,6 +561,7 @@ input, textarea {
     margin: 0 auto;
 }
 
+/* Сетка террасы (2x2) */
 .terrace-hall-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
@@ -535,7 +571,9 @@ input, textarea {
     margin: 0 auto;
 }
 
-/* Позиции для новых столов */
+/* === ПОЗИЦИИ СТОЛОВ ДЛЯ НОВОЙ СХЕМЫ === */
+
+/* Основной зал (столы 1-9) */
 .table-1 { grid-column: 1; grid-row: 1; }
 .table-2 { grid-column: 2; grid-row: 1; }
 .table-3 { grid-column: 3; grid-row: 1; }
@@ -546,12 +584,15 @@ input, textarea {
 .table-8 { grid-column: 2; grid-row: 3; }
 .table-9 { grid-column: 3; grid-row: 3; }
 
+/* Терраса (столы 10-13) */
 .table-10 { grid-column: 1; grid-row: 1; }
 .table-11 { grid-column: 2; grid-row: 1; }
 .table-12 { grid-column: 1; grid-row: 2; }
 .table-13 { grid-column: 2; grid-row: 2; }
 
-/* ===== ФОРМА БРОНИРОВАНИЯ ===== */
+/* === ФОРМА БРОНИРОВАНИЯ === */
+
+/* Контейнер формы бронирования */
 .booking-form-container {
     background: #0b1f1e;
     padding: 30px;
@@ -563,12 +604,14 @@ input, textarea {
     width: 100%;
 }
 
+/* Заголовок формы */
 .booking-form-container h2 {
     color: #9c6b5a;
     margin-bottom: 20px;
     text-align: center;
 }
 
+/* Блок с информацией о бронировании (отображается перед формой) */
 .booking-info {
     background: #1f4d45;
     padding: 15px;
@@ -578,10 +621,12 @@ input, textarea {
     line-height: 1.6;
 }
 
+/* Группа полей формы */
 .form-group {
     margin-bottom: 15px;
 }
 
+/* Поля ввода и текстовая область в форме */
 .form-group input,
 .form-group textarea {
     width: 100%;
@@ -593,30 +638,36 @@ input, textarea {
     font-size: 14px;
 }
 
+/* Фокус на полях формы */
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: #f1b400;
 }
 
+/* Плейсхолдер полей формы */
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Некорректно заполненное поле */
 .form-group input:invalid {
     border-color: #ff4444;
 }
 
+/* Корректно заполненное поле */
 .form-group input:valid {
     border-color: #00C851;
 }
 
+/* Действия формы (кнопки) */
 .form-actions {
     text-align: center;
     margin-top: 20px;
 }
 
+/* Кнопка отправки формы */
 .form-actions button {
     padding: 14px 40px;
     background: #9c6b5a;
@@ -628,17 +679,21 @@ input, textarea {
     transition: background 0.3s;
 }
 
+/* Эффект наведения для активной кнопки */
 .form-actions button:hover:not(:disabled) {
     background: #b57d6a;
 }
 
+/* Отключённая кнопка отправки */
 .form-actions button:disabled {
     background: #828282;
     cursor: not-allowed;
     opacity: 0.5;
 }
 
-/* ===== АДАПТИВ ===== */
+/* === АДАПТИВ ДЛЯ ОБНОВЛЁННОЙ СХЕМЫ === */
+
+/* Планшеты (до 900px) */
 @media (max-width: 900px) {
     .hall-layout {
         flex-direction: column;
@@ -664,6 +719,7 @@ input, textarea {
     }
 }
 
+/* Смартфоны (до 600px) */
 @media (max-width: 600px) {
     .date-time-selection {
         padding: 20px;
@@ -696,6 +752,7 @@ input, textarea {
     }
 }
 
+/* Маленькие смартфоны (до 400px) */
 @media (max-width: 400px) {
     .main-hall-grid {
         grid-template-columns: repeat(2, minmax(65px, 1fr));
@@ -706,11 +763,9 @@ input, textarea {
     }
 }
 
-/* Стили для простого календаря */
-.calendar-wrapper {
-    margin-bottom: 20px;
-}
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ === */
 
+/* Метка для поля календаря */
 .calendar-wrapper label {
     display: block;
     margin-bottom: 8px;
@@ -718,51 +773,20 @@ input, textarea {
     font-size: 14px;
 }
 
-.date-picker {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #9c6b5a;
-    background: #1f4d45;
-    color: #fff;
-    font-size: 16px;
-}
-
+/* Стилизация иконки календаря в браузере */
 .date-picker::-webkit-calendar-picker-indicator {
     filter: invert(1);
     cursor: pointer;
 }
 
-/* Стили для времени */
-.time.past {
-    background: #444;
-    border-color: #444;
-    cursor: not-allowed;
-    opacity: 0.3;
-}
-
-.time.busy {
-    background: #828282;
-    border-color: #828282;
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
+/* Состояния загрузки и ошибки */
 .loading, .error {
     color: #fff;
     padding: 20px;
     text-align: center;
 }
 
+/* Сообщение об ошибке */
 .error {
     color: #ff6b6b;
 }
-
-
-
-
-
-
-
-
-
