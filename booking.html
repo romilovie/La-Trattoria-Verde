@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бронирование | La Trattoria Verde</title>
+    <!-- Подключение CSS -->
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ================= ШАПКА САЙТА ================= -->
 <header class="header">
     <div class="container header__inner">
+        <!-- Логотип -->
         <a href="index.html" class="logo">La Trattoria Verde</a>
+        <!-- Навигационное меню -->
         <nav class="nav" id="nav-menu">
             <ul class="nav__list">
                 <li><a href="index.html">Главная</a></li>
@@ -24,18 +27,21 @@
                 <li><a href="reviews.html">Отзывы</a></li>
             </ul>
         </nav>
+        <!-- Блок действий -->
         <div class="header__actions">
             <a href="tel:+74951234568" class="header__phone">+7 (495) 123-45-68</a>
             <a href="booking.html" class="btn btn--primary">Забронировать столик</a>
+            <!-- Кнопка мобильного меню -->
             <button class="burger" id="burger-btn" aria-label="Открыть меню">☰</button>
         </div>
     </div>
 </header>
 
+<!-- ================= ОСНОВНОЕ СОДЕРЖИМОЕ ================= -->
 <main class="booking">
     <h1>Выберите дату и время</h1>
     
-    <!-- Простой HTML5 календарь -->
+    <!-- Блок выбора даты и времени -->
     <div class="date-time-selection">
         <div class="calendar-wrapper">
             <label for="bookingDate">Выберите дату:</label>
@@ -44,17 +50,16 @@
         
         <div class="time-slots">
             <h3>Доступное время:</h3>
-            <div class="times" id="timeSlots">
-                <!-- Время будет загружаться динамически -->
-            </div>
+            <!-- Динамическая загрузка временных слотов -->
+            <div class="times" id="timeSlots"></div>
         </div>
     </div>
 
     <h2>Выберите столики</h2>
 
-    <!-- Схема зала с разделением на основную часть и веранду -->
+    <!-- Схема зала -->
     <div class="hall-layout">
-        <!-- Основной зал (9 столов) -->
+        <!-- Основной зал -->
         <div class="main-hall">
             <h3>Основной зал</h3>
             <div class="hall main-hall-grid">
@@ -73,7 +78,7 @@
         <!-- Вертикальный разделитель -->
         <div class="hall-divider"></div>
 
-        <!-- Веранда (4 стола) -->
+        <!-- Веранда -->
         <div class="terrace-hall">
             <h3>Веранда</h3>
             <div class="hall terrace-hall-grid">
@@ -85,13 +90,13 @@
         </div>
     </div>
 
-    <!-- Информация о выбранных столах -->
+    <!-- Сводка по выбранным столам -->
     <div class="summary">
         <span>Выбрано столиков: <strong id="tablesCount">0</strong></span>
         <span>Общее количество мест: <strong id="seatsCount">0</strong></span>
     </div>
 
-    <!-- Форма ввода данных под столами -->
+    <!-- Форма бронирования -->
     <div class="booking-form-container" id="bookingFormContainer" style="display: none;">
         <h2>Данные для бронирования</h2>
         
@@ -121,9 +126,10 @@
     </div>
 </main>
 
-<!-- ================= FOOTER ================= -->
+<!-- ================= ПОДВАЛ САЙТА ================= -->
 <footer class="footer">
     <div class="container footer__grid">
+        <!-- Колонка навигации -->
         <div class="footer__column">
             <h3>Навигация</h3>
             <ul>
@@ -133,17 +139,20 @@
                 <li><a href="booking.html">Бронирование</a></li>
             </ul>
         </div>
+        <!-- Колонка контактов -->
         <div class="footer__column">
             <h3>Контакты</h3>
             <p>Адрес: г. Калининград, ул. Мореходная, 3</p>
             <p>Телефон: <a href="tel:+74951234568">+7 (495) 123-45-68</a></p>
             <p>Email: info@trattoriaverde.ru</p>
         </div>
+        <!-- Колонка режима работы -->
         <div class="footer__column">
             <h3>Часы работы</h3>
             <p>Пн–Пт: 12:00 – 23:00</p>
             <p>Сб–Вс: 12:00 – 00:00</p>
         </div>
+        <!-- Колонка подписки и соцсетей -->
         <div class="footer__column">
             <h3>Подписка</h3>
             <form class="subscribe-form">
@@ -157,6 +166,7 @@
             </div>
         </div>
     </div>
+    <!-- Нижняя строка -->
     <div class="footer__bottom">
         <p>© La Trattoria Verde, 2026</p>
         <a href="#">Политика конфиденциальности</a>
@@ -170,17 +180,3 @@
 <script src="js/script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
