@@ -4,22 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Меню ресторана</title>
+  <!-- Подключение CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
 
-	
-<!-- ================= HEADER ================= -->
+<!-- ================= ШАПКА САЙТА ================= -->
 <header class="header">
     <div class="container header__inner">
-
         <!-- Логотип -->
         <a href="index.html" class="logo">
             La Trattoria Verde
         </a>
-
-        <!-- Навигация -->
+        <!-- Навигационное меню -->
         <nav class="nav" id="nav-menu">
             <ul class="nav__list">
                 <li><a href="index.html">Главная</a></li>
@@ -31,47 +29,38 @@
                 <li><a href="reviews.html">Отзывы</a></li>
             </ul>
         </nav>
-
-        <!-- Правая часть хедера -->
+        <!-- Блок действий -->
         <div class="header__actions">
             <a href="tel:+74951234568" class="header__phone">
                 +7 (495) 123-45-68
             </a>
-
             <a href="booking.html" class="btn btn--primary">
                 Забронировать столик
             </a>
-
-            <!-- Кнопка бургер-меню (для мобильных, JS позже) -->
+            <!-- Кнопка мобильного меню -->
             <button class="burger" id="burger-btn" aria-label="Открыть меню">
                 ☰
             </button>
         </div>
-
     </div>
 </header>
 
+<!-- ================= ОСНОВНОЕ СОДЕРЖИМОЕ ================= -->
 <main>
-<!-- =========================
-     КАТЕГОРИИ
-========================== -->
-<div class="menu-categories">
-    <a href="#antipasti">Закуски</a> |
-    <a href="#pasta">Паста</a> |
-    <a href="#pizza">Пицца</a> |
-    <a href="#secondi">Основные блюда</a> |
-    <a href="#dolci">Десерты</a> |
-    <a href="#bevande">Напитки</a>
-</div>
+    <!-- Навигация по категориям меню -->
+    <div class="menu-categories">
+        <a href="#antipasti">Закуски</a> |
+        <a href="#pasta">Паста</a> |
+        <a href="#pizza">Пицца</a> |
+        <a href="#secondi">Основные блюда</a> |
+        <a href="#dolci">Десерты</a> |
+        <a href="#bevande">Напитки</a>
+    </div>
 
-
-
-<!-- ===== МЕНЮ ===== -->
-<section class="menu-section" id="antipasti">
+    <!-- Секция "Закуски" -->
+    <section class="menu-section" id="antipasti">
         <h2>ЗАКУСКИ</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/BRUSKETTA.png" alt="">
                 <div class="menu-item-content">
@@ -88,7 +77,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/KARPACHO.png" alt="">
                 <div class="menu-item-content">
@@ -106,18 +94,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- =========================
-         ПАСТА
-    ========================== -->
+    <!-- Секция "Паста" -->
     <section class="menu-section" id="pasta">
         <h2>ПАСТА</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/KARBONARA.png" alt="">
                 <div class="menu-item-content">
@@ -134,7 +117,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/RAWIOLIIIIII.png" alt="">
                 <div class="menu-item-content">
@@ -151,18 +133,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- =========================
-         ПИЦЦА
-    ========================== -->
+    <!-- Секция "Пицца" -->
     <section class="menu-section" id="pizza">
         <h2>ПИЦЦА</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/MARGARITA.png" alt="">
                 <div class="menu-item-content">
@@ -179,7 +156,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/PIZZA_4_SINA.png" alt="">
                 <div class="menu-item-content">
@@ -187,7 +163,7 @@
                         Пицца «Четыре сыра»
                     </div>
                     <div class="menu-item-desc">
-			Моцарелла, горгонзола, пармезан, чеддер, дрожжевое тесто, оливковое масло, орегано
+                        Моцарелла, горгонзола, пармезан, чеддер, дрожжевое тесто, оливковое масло, орегано
                     </div>
                     <div class="menu-item-meta">
                         <span class="tag">GF</span>
@@ -195,18 +171,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- =========================
-         ОСНОВНЫЕ БЛЮДА
-    ========================== -->
+    <!-- Секция "Основные блюда" -->
     <section class="menu-section" id="secondi">
         <h2>ОСНОВНЫЕ БЛЮДА</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/DEAD_FISH_IN_NUTS.png" alt="">
                 <div class="menu-item-content">
@@ -223,7 +194,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/DEAD_LITLE_COW.png" alt="">
                 <div class="menu-item-content">
@@ -240,18 +210,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- =========================
-         ДЕСЕРТЫ
-    ========================== -->
+    <!-- Секция "Десерты" -->
     <section class="menu-section" id="dolci">
         <h2>ДЕСЕРТЫ</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/TIRAMISSU.png" alt="">
                 <div class="menu-item-content">
@@ -267,7 +232,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/DESERT2.png" alt="">
                 <div class="menu-item-content">
@@ -284,18 +248,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- =========================
-         НАПИТКИ
-    ========================== -->
+    <!-- Секция "Напитки" -->
     <section class="menu-section" id="bevande">
         <h2>НАПИТКИ</h2>
-
         <div class="menu-grid">
-
             <div class="menu-item">
                 <img src="img/Lavender_Sour.png" alt="">
                 <div class="menu-item-content">
@@ -311,7 +270,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <img src="img/KIANTI_CLASSICK.png" alt="">
                 <div class="menu-item-content">
@@ -327,17 +285,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
-
 </main>
 
-<!-- ================= FOOTER ================= -->
+<!-- ================= ПОДВАЛ САЙТА ================= -->
 <footer class="footer">
     <div class="container footer__grid">
-
-        <!-- Колонка 1 -->
+        <!-- Колонка навигации -->
         <div class="footer__column">
             <h3>Навигация</h3>
             <ul>
@@ -347,39 +302,33 @@
                 <li><a href="booking.html">Бронирование</a></li>
             </ul>
         </div>
-
-        <!-- Колонка 2 -->
+        <!-- Колонка контактов -->
         <div class="footer__column">
             <h3>Контакты</h3>
             <p>Адрес: г. Калининград, ул. Мореходная, 3</p>
             <p>Телефон: <a href="tel:+74951234568">+7 (495) 123-45-68</a></p>
             <p>Email: info@trattoriaverde.ru</p>
         </div>
-
-        <!-- Колонка 3 -->
+        <!-- Колонка режима работы -->
         <div class="footer__column">
             <h3>Часы работы</h3>
             <p>Пн–Пт: 12:00 – 23:00</p>
             <p>Сб–Вс: 12:00 – 00:00</p>
         </div>
-
-        <!-- Колонка 4 -->
+        <!-- Колонка подписки и соцсетей -->
         <div class="footer__column">
             <h3>Подписка</h3>
             <form class="subscribe-form">
                 <input type="email" placeholder="Ваш email">
                 <button type="submit">Подписаться</button>
             </form>
-
             <div class="socials">
                 <a href="#">VK</a>
                 <a href="#">Instagram</a>
                 <a href="#">Telegram</a>
             </div>
         </div>
-
     </div>
-
     <!-- Нижняя строка -->
     <div class="footer__bottom">
         <p>© La Trattoria Verde, 2026</p>
@@ -387,12 +336,9 @@
     </div>
 </footer>
 
+<!-- Подключение скриптов -->
 <script src="js/menu.js"></script>
 <script src="js/script.js"></script>
+
 </body>
 </html>
-
-
-
-
-
