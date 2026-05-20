@@ -362,9 +362,24 @@ ul {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Разносит p и .footer__links по краям */
+    align-items: center;            /* Выравнивает по вертикали (опционально) */
     font-size: 13px;
     opacity: 0.7;
+}
+
+.footer__links {
+    display: flex;
+    gap: 20px; /* Расстояние между двумя ссылками */
+}
+
+.footer__links a {
+    color: inherit;  /* Наследует цвет от родителя */
+    text-decoration: none;
+}
+
+.footer__links a:hover {
+    text-decoration: underline; /* Опционально: эффект при наведении */
 }
 
 /* === АДАПТИВНАЯ ВЕРСТКА === */
